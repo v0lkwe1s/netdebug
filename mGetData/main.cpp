@@ -22,7 +22,7 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     GetSystemConfiguration gsc;
-    gsc.getMemInfo();
+    gsc.getCpuLoad();
     
     return 0;
 }
