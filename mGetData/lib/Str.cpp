@@ -71,9 +71,9 @@ string Str::getLine(string file) {
 }
 
 
-string Str::intToStr(int i) {
+string Str::numberToStr(double n) {
     stringstream ss;
-	ss << i;
+	ss << n;
 	string str = ss.str();
 	return str;
 }

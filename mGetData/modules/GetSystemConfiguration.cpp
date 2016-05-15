@@ -12,6 +12,7 @@
  */
 
 #include "GetSystemConfiguration.h"
+#include "Serial.h"
 
 using namespace std;
 
@@ -58,26 +59,42 @@ void GetSystemConfiguration::getDiskInfo(){
 }
 //get Memory stats
 void GetSystemConfiguration::getMemInfo(){
+	Serial serial;
 	sysinfo (&si);
-	cout << "Memoria Total " << si.totalram << endl;
-	cout << "Memoria em Uso " << ((si.totalram - si.freeram)) << endl;
-	cout << "Ram Livre " << si.freeram  << endl;
-	cout << "Processos " << si.procs << endl;
-	cout << si.bufferram   << endl;
-	cout << "Swap " << si.totalswap   << "MB" << endl;
+	Str s;
+	string jSon;
+	jSon = "{ \"Memory\":{\"totalRam\" : " + s.numberToStr((si.totalram /(1024*1024))) + ","
+		"\"freeRam\" : " + s.numberToStr((si.freeram /(1024*1024))) + ","
+		"\"buffers\" : " + s.numberToStr((si.bufferram /(1024*1024))) + ","
+		"\"shared\" : " + s.numberToStr((si.sharedram)) + ","
+		"\"totalSwap\" : " + s.numberToStr((si.totalswap /(1024*1024))) + ","
+		"\"freeSwap\" : " + s.numberToStr((si.freeswap /(1024*1024))) + ","
+		"\"procs\" : " + s.numberToStr(si.procs) + ","
+		"}}";
+	cout << jSon << endl;
+	string use = s.numberToStr(si.totalram /(1024*1024) - (si.freeram /(1024*1024)));
+	serial.send("RAM " + use);
+	s.~Str();
+	serial.~Serial();
 }
 
-void GetSystemConfiguration::getCpuLoad()
-{
-    size_t previous_idle_time=0, previous_total_time=0;
-    for (size_t idle_time, total_time; get_cpu_times(idle_time, total_time); sleep(1)) {
-        const float idle_time_delta = idle_time - previous_idle_time;
-        const float total_time_delta = total_time - previous_total_time;
-        const float utilization = 100.0 * (1.0 - idle_time_delta / total_time_delta);
-        std::cout << utilization << '%' << std::endl;
-        previous_idle_time = idle_time;
-        previous_total_time = total_time;
-    }
+void GetSystemConfiguration::getCpuLoad(){
+	Serial serial;
+	
+	Str s;
+	size_t previous_idle_time=0, previous_total_time=0;
+	for (size_t idle_time, total_time; get_cpu_times(idle_time, total_time); sleep(1)) {
+		const float idle_time_delta = idle_time - previous_idle_time;
+		const float total_time_delta = total_time - previous_total_time;
+		const float utilization = 100.0 * (1.0 - idle_time_delta / total_time_delta);
+		std::cout << utilization << '%' << std::endl;
+		serial.send("Cpu " + s.numberToStr((int) utilization) + "%-");
+		getMemInfo();
+		previous_idle_time = idle_time;
+		previous_total_time = total_time;
+	}
+	s.~Str();
+	serial.~Serial();
 }
 
 

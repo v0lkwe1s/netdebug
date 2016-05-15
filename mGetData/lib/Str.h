@@ -31,7 +31,7 @@ public:
     virtual ~Str();
     
     void split(const string& s, char c, vector<string>& v);
-    string intToStr(int i);
+    string numberToStr(double n);
     string getFileText(string file);
     string subString(string t, string s);
     string getLine(string file);

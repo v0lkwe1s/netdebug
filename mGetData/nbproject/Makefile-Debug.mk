@@ -37,7 +37,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/lib/Str.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/modules/GetSystemConfiguration.o
+	${OBJECTDIR}/modules/GetSystemConfiguration.o \
+	${OBJECTDIR}/modules/Serial.o
 
 
 # C Compiler Flags
@@ -78,6 +79,11 @@ ${OBJECTDIR}/modules/GetSystemConfiguration.o: modules/GetSystemConfiguration.cp
 	${MKDIR} -p ${OBJECTDIR}/modules
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/GetSystemConfiguration.o modules/GetSystemConfiguration.cpp
+
+${OBJECTDIR}/modules/Serial.o: modules/Serial.cpp 
+	${MKDIR} -p ${OBJECTDIR}/modules
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/Serial.o modules/Serial.cpp
 
 # Subprojects
 .build-subprojects:

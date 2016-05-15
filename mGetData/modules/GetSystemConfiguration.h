@@ -21,6 +21,7 @@
 #include <iostream>
 #include <numeric>
 #include <unistd.h>
+#include <math.h>
 
 
 class GetSystemConfiguration {
