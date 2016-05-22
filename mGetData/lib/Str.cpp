@@ -77,3 +77,20 @@ string Str::numberToStr(double n) {
 	string str = ss.str();
 	return str;
 }
+
+void Str::createFileText(string text, string file){
+	ofstream out; 
+	out.open(file.c_str());
+	out << text; 
+	out.close(); 
+}
+
+string Str::replace(string& subject, const string& search, const string& replace)
+{
+	size_t pos = 0;
+	while ((pos = subject.find(search, pos)) != string::npos) {
+		subject.replace(pos, search.length(), replace);
+		pos += replace.length();
+	}
+	return subject;
+}

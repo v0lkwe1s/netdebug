@@ -28,19 +28,42 @@ GetSystemConfiguration::~GetSystemConfiguration() {
 
 void GetSystemConfiguration::getCpuInfo() {
 	Str s;
-	//gera um arquivo com estrutura JSON 
-	string sysReq = "cat /proc/cpuinfo  | awk -F: '{print ""\"\\""\"\"$1\" ""\\\": "
-		"\\\"\"$2\"""\\\""",\"""}' > /tmp/getCpu";
+	string sysReq = "lscpu  | awk -F: '{print ""\"\\""\"\"$1\"""\\\": ""\\\"\"$2\"""\\\""",\"""}' > /tmp/getCpu";
 	system(sysReq.c_str());
-	//concatenado uso de const com string por causa do tamanho do arquivo.
-	const string cpuInfo = "{" + s.getFileText("/tmp/getCpu") + "}";
-	cout << cpuInfo << endl;
+	
+	string getCpuInfo = s.getFileText("/tmp/getCpu");
+	getCpuInfo[(strlen(getCpuInfo.c_str())-1)] = ' ';
+	string cpuInfo = "{\"cpuInfo\":[{" + getCpuInfo  + "}]}";
+	string nulls = ",\" \": \"\",";
+	
+	string n = "},{";
+	cout << s.replace(cpuInfo, nulls, n) << endl;
+	string json = s.replace(cpuInfo, nulls, n);
+	s.createFileText(json.c_str(), "/var/www/html/netdebug/json/cpuInfo.json");
 	s.~Str();
 }
 
+void GetSystemConfiguration::getProcessList(){
+	Str s;
+	string sysReq = "ps --no-headers -eo  \"{ \\""\"pid\\""\" : %p, "
+		"\\""\"user\\""\" : \\""\"%U\\""\","
+		"\\""\"tty\\""\" : \\""\"%y\\""\", "
+		"\\""\"time\\""\" : \\""\"%x\\""\","
+		"\\""\"command\\""\" : \\""\"%c\\""\", "
+		//"\\""\"args\\""\" : \\""\"%a\\""\","
+		"\\""\"cpu\\""\" : %C},\" > /tmp/ps";
+//	cout << sysReq << endl;
+	system(sysReq.c_str());
+	string json = s.getFileText("/tmp/ps");
+	json[(strlen(json.c_str())-1)] = ' ';
+	const string diskInfo = "{\"Proccess\":[" + json  + "]}";
+	s.createFileText(diskInfo, "/var/www/html/netdebug/json/ps.json");
+	s.~Str();
+}
+
+
 void GetSystemConfiguration::getDiskInfo(){
 	Str s;
-	//   \"" $1 "\"
 	string sysReq = "df -Ph |  awk 'NR>1 {print "
 		"\"{\\"
 		"\"fs\\""\": \\""\"\" $1 \"""\\""""\","
@@ -50,16 +73,15 @@ void GetSystemConfiguration::getDiskInfo(){
 		"\\""\"used%\\""\": \\""\"\" $5 \"""\\""""\","
 		"\\""\"mounted\\""\": \\""\"\" $6 \"""\\""""\""
 		"},\"""}' > /tmp/diskInfo";
-	cout << sysReq << endl;
-	system(sysReq.c_str());
-	//concatenado uso de const com string por causa do tamanho do arquivo.
-	const string cpuInfo = "{" + s.getFileText("/tmp/diskInfo") + "}";
-	cout << cpuInfo << endl;
-	s.~Str();
+		system(sysReq.c_str());
+		string json = s.getFileText("/tmp/diskInfo");
+		json[(strlen(json.c_str())-1)] = ' ';
+		const string diskInfo = "{\"Disk\":[" + json  + "]}";
+		s.createFileText(diskInfo, "/var/www/html/netdebug/json/disk.json");
+		s.~Str();
 }
-//get Memory stats
+
 void GetSystemConfiguration::getMemInfo(){
-	Serial serial;
 	sysinfo (&si);
 	Str s;
 	string jSon;
@@ -69,13 +91,12 @@ void GetSystemConfiguration::getMemInfo(){
 		"\"shared\" : " + s.numberToStr((si.sharedram)) + ","
 		"\"totalSwap\" : " + s.numberToStr((si.totalswap /(1024*1024))) + ","
 		"\"freeSwap\" : " + s.numberToStr((si.freeswap /(1024*1024))) + ","
-		"\"procs\" : " + s.numberToStr(si.procs) + ","
+		"\"procs\" : " + s.numberToStr(si.procs) + ""
 		"}}";
 	cout << jSon << endl;
 	string use = s.numberToStr(si.totalram /(1024*1024) - (si.freeram /(1024*1024)));
-	serial.send("RAM " + use);
+	s.createFileText(jSon, "/var/www/html/netdebug/json/mem.json");
 	s.~Str();
-	serial.~Serial();
 }
 
 void GetSystemConfiguration::getCpuLoad(){
@@ -89,10 +110,15 @@ void GetSystemConfiguration::getCpuLoad(){
 		const float utilization = 100.0 * (1.0 - idle_time_delta / total_time_delta);
 		std::cout << utilization << '%' << std::endl;
 		serial.send("Cpu " + s.numberToStr((int) utilization) + "%-");
+		string json = "{\"Load\": {\"cpu\": " + s.numberToStr((int) utilization) + "}}";
+		cout << json << endl;
+		s.createFileText(json,"/var/www/html/netdebug/json/cpu.json");
 		getMemInfo();
+		getDiskInfo();
 		previous_idle_time = idle_time;
 		previous_total_time = total_time;
 	}
+	
 	s.~Str();
 	serial.~Serial();
 }

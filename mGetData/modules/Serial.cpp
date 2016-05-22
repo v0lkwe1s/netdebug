@@ -27,7 +27,7 @@ Serial::~Serial()
 
 void Serial::send(string str)
 {
-	string sysReq = "echo -n " + str + "> /dev/ttyACM0";
+	string sysReq = "echo -n " + str + "> /dev/ttyACM1";
 	system(sysReq.c_str());
 }
 

@@ -22,8 +22,7 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     GetSystemConfiguration gsc;
-    gsc.getCpuLoad();
-    
+    gsc.getCpuInfo(); 
     return 0;
 }
 

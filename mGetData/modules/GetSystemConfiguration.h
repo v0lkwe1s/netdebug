@@ -33,10 +33,8 @@ public:
     void getDiskInfo();
     void getMemInfo();
     void getCpuLoad();
+    void getProcessList();
     virtual ~GetSystemConfiguration();
-    
-    
-    
 private:
     
 vector<size_t> get_cpu_times() {

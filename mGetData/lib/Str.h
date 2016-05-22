@@ -35,7 +35,9 @@ public:
     string getFileText(string file);
     string subString(string t, string s);
     string getLine(string file);
-    char *strToChar(string str, int *csock);
+    //text ---> text to write, file --> file and extension
+    void createFileText(string text, string file);
+    string replace(string& subject, const string& search,const string& replace);
     
 private:
     
