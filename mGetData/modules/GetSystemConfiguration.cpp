@@ -11,11 +11,9 @@
  * Created on May 8, 2016, 6:27 PM
  */
 
+#include <memory>
+
 #include "GetSystemConfiguration.h"
-#include "Serial.h"
-
-using namespace std;
-
 
 GetSystemConfiguration::GetSystemConfiguration() {
 }
@@ -26,7 +24,7 @@ GetSystemConfiguration::GetSystemConfiguration(const GetSystemConfiguration& ori
 GetSystemConfiguration::~GetSystemConfiguration() {
 }
 
-void GetSystemConfiguration::getCpuInfo() {
+string GetSystemConfiguration::getCpuInfo() {
 	Str s;
 	string sysReq = "lscpu  | awk -F: '{print ""\"\\""\"\"$1\"""\\\": ""\\\"\"$2\"""\\\""",\"""}' > /tmp/getCpu";
 	system(sysReq.c_str());
@@ -37,13 +35,12 @@ void GetSystemConfiguration::getCpuInfo() {
 	string nulls = ",\" \": \"\",";
 	
 	string n = "},{";
-	cout << s.replace(cpuInfo, nulls, n) << endl;
 	string json = s.replace(cpuInfo, nulls, n);
-	s.createFileText(json.c_str(), "/var/www/html/netdebug/json/cpuInfo.json");
 	s.~Str();
+	return json;
 }
 
-void GetSystemConfiguration::getProcessList(){
+string GetSystemConfiguration::getProcessList(){
 	Str s;
 	string sysReq = "ps --no-headers -eo  \"{ \\""\"pid\\""\" : %p, "
 		"\\""\"user\\""\" : \\""\"%U\\""\","
@@ -52,17 +49,16 @@ void GetSystemConfiguration::getProcessList(){
 		"\\""\"command\\""\" : \\""\"%c\\""\", "
 		//"\\""\"args\\""\" : \\""\"%a\\""\","
 		"\\""\"cpu\\""\" : %C},\" > /tmp/ps";
-//	cout << sysReq << endl;
+
 	system(sysReq.c_str());
 	string json = s.getFileText("/tmp/ps");
 	json[(strlen(json.c_str())-1)] = ' ';
-	const string diskInfo = "{\"Proccess\":[" + json  + "]}";
-	s.createFileText(diskInfo, "/var/www/html/netdebug/json/ps.json");
+	const string processList = "{\"Proccess\":[" + json  + "]}";
 	s.~Str();
+	return processList;
 }
 
-
-void GetSystemConfiguration::getDiskInfo(){
+string GetSystemConfiguration::getDiskInfo(){
 	Str s;
 	string sysReq = "df -Ph |  awk 'NR>1 {print "
 		"\"{\\"
@@ -73,15 +69,15 @@ void GetSystemConfiguration::getDiskInfo(){
 		"\\""\"used%\\""\": \\""\"\" $5 \"""\\""""\","
 		"\\""\"mounted\\""\": \\""\"\" $6 \"""\\""""\""
 		"},\"""}' > /tmp/diskInfo";
-		system(sysReq.c_str());
-		string json = s.getFileText("/tmp/diskInfo");
-		json[(strlen(json.c_str())-1)] = ' ';
-		const string diskInfo = "{\"Disk\":[" + json  + "]}";
-		s.createFileText(diskInfo, "/var/www/html/netdebug/json/disk.json");
-		s.~Str();
+	system(sysReq.c_str());
+	string json = s.getFileText("/tmp/diskInfo");
+	json[(strlen(json.c_str())-1)] = ' ';
+	string diskInfo = "{\"Disk\":[" + json  + "]}";
+	s.~Str();
+	return diskInfo;
 }
 
-void GetSystemConfiguration::getMemInfo(){
+string GetSystemConfiguration::getMemInfo(){
 	sysinfo (&si);
 	Str s;
 	string jSon;
@@ -93,34 +89,37 @@ void GetSystemConfiguration::getMemInfo(){
 		"\"freeSwap\" : " + s.numberToStr((si.freeswap /(1024*1024))) + ","
 		"\"procs\" : " + s.numberToStr(si.procs) + ""
 		"}}";
-	cout << jSon << endl;
-	string use = s.numberToStr(si.totalram /(1024*1024) - (si.freeram /(1024*1024)));
-	s.createFileText(jSon, "/var/www/html/netdebug/json/mem.json");
 	s.~Str();
+	return jSon;
 }
 
-void GetSystemConfiguration::getCpuLoad(){
-	Serial serial;
-	
+string GetSystemConfiguration::getCpuLoad(){
 	Str s;
+	string json;
 	size_t previous_idle_time=0, previous_total_time=0;
 	for (size_t idle_time, total_time; get_cpu_times(idle_time, total_time); sleep(1)) {
 		const float idle_time_delta = idle_time - previous_idle_time;
 		const float total_time_delta = total_time - previous_total_time;
 		const float utilization = 100.0 * (1.0 - idle_time_delta / total_time_delta);
-		std::cout << utilization << '%' << std::endl;
-		serial.send("Cpu " + s.numberToStr((int) utilization) + "%-");
-		string json = "{\"Load\": {\"cpu\": " + s.numberToStr((int) utilization) + "}}";
-		cout << json << endl;
-		s.createFileText(json,"/var/www/html/netdebug/json/cpu.json");
-		getMemInfo();
-		getDiskInfo();
 		previous_idle_time = idle_time;
 		previous_total_time = total_time;
+		json = "{\"Load\": {\"cpu\": " + s.numberToStr((int) utilization) + "}}";
+		break;
 	}
-	
 	s.~Str();
-	serial.~Serial();
+	return json;
 }
 
-
+string GetSystemConfiguration::getHost(){
+	Str s;
+	string sysReq = "uname -n > /tmp/getHostname";
+	system(sysReq.c_str());
+	string hostname = s.getFileText("/tmp/getHost");
+	sysReq = "uname -sv > /tmp/getkernel";
+	system(sysReq.c_str());
+	string kernel = s.getFileText("/tmp/getkernel");
+	string parse = "{\"Host\" :[{\"hostname\" : \"" + hostname + "\","
+		"\"kernel\" : \"" + kernel + "\"}]}";
+	s.~Str();
+	return parse;
+}

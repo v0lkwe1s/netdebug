@@ -5,17 +5,17 @@
  */
 
 /* 
- * File:   SendDataSerial.h
+ * File:   Serial.h
  * Author: williamvolkweis
  *
- * Created on May 13, 2016, 11:07 PM
+ * Created on May 24, 2016, 8:43 PM
  */
-
 
 #ifndef SERIAL_H
 #define SERIAL_H
 
-#include "GetSystemConfiguration.h"
+#include "../lib/Str.h"
+
 using namespace std;
 
 class Serial {
@@ -23,10 +23,20 @@ public:
     Serial();
     Serial(const Serial& orig);
     virtual ~Serial();
-    void sendCpuUsage(float cpuUse);
-    void send(string str);
-private:
+    
+    void send(string text);
+    void setBaud(unsigned int baud);
+    void setTty(string tty);
 
+    unsigned int getBaud() const;
+
+    string getTty() const;
+
+    
+private:
+    string tty;
+    unsigned int baud;
+    
 };
 
 #endif /* SERIAL_H */

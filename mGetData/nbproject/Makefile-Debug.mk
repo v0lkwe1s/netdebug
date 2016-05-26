@@ -35,18 +35,18 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/lib/Serial.o \
 	${OBJECTDIR}/lib/Str.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/modules/GetSystemConfiguration.o \
-	${OBJECTDIR}/modules/Serial.o
+	${OBJECTDIR}/modules/GetSystemConfiguration.o
 
 
 # C Compiler Flags
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-lpthread
+CXXFLAGS=-lpthread
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -55,7 +55,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-lcurses
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -65,25 +65,25 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mgetdata: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mgetdata ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/lib/Serial.o: lib/Serial.cpp 
+	${MKDIR} -p ${OBJECTDIR}/lib
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/Serial.o lib/Serial.cpp
+
 ${OBJECTDIR}/lib/Str.o: lib/Str.cpp 
 	${MKDIR} -p ${OBJECTDIR}/lib
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/Str.o lib/Str.cpp
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/Str.o lib/Str.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/modules/GetSystemConfiguration.o: modules/GetSystemConfiguration.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/GetSystemConfiguration.o modules/GetSystemConfiguration.cpp
-
-${OBJECTDIR}/modules/Serial.o: modules/Serial.cpp 
-	${MKDIR} -p ${OBJECTDIR}/modules
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/Serial.o modules/Serial.cpp
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/GetSystemConfiguration.o modules/GetSystemConfiguration.cpp
 
 # Subprojects
 .build-subprojects:

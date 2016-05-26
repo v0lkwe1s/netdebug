@@ -5,7 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>modules/GetSystemConfiguration.h</itemPath>
-      <itemPath>modules/Serial.h</itemPath>
+      <itemPath>lib/Serial.h</itemPath>
     </logicalFolder>
     <logicalFolder name="lib" displayName="lib" projectFiles="true">
       <itemPath>lib/Str.cpp</itemPath>
@@ -19,7 +19,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>modules/GetSystemConfiguration.cpp</itemPath>
-      <itemPath>modules/Serial.cpp</itemPath>
+      <itemPath>lib/Serial.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -47,8 +47,21 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <ccTool>
+          <standard>8</standard>
+          <commandLine>-lpthread</commandLine>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibStdlibItem>Curses</linkerLibStdlibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
       <item path="TODO" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/Serial.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/Serial.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="lib/Str.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -59,10 +72,6 @@
       <item path="modules/GetSystemConfiguration.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="modules/GetSystemConfiguration.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="modules/Serial.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="modules/Serial.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -87,6 +96,10 @@
       </compileType>
       <item path="TODO" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="lib/Serial.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/Serial.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="lib/Str.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="lib/Str.h" ex="false" tool="3" flavor2="0">
@@ -96,10 +109,6 @@
       <item path="modules/GetSystemConfiguration.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="modules/GetSystemConfiguration.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="modules/Serial.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="modules/Serial.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

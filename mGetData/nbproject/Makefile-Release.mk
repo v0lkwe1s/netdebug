@@ -35,10 +35,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/lib/Serial.o \
 	${OBJECTDIR}/lib/Str.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/modules/GetSystemConfiguration.o \
-	${OBJECTDIR}/modules/Serial.o
+	${OBJECTDIR}/modules/GetSystemConfiguration.o
 
 
 # C Compiler Flags
@@ -65,6 +65,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mgetdata: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mgetdata ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/lib/Serial.o: lib/Serial.cpp 
+	${MKDIR} -p ${OBJECTDIR}/lib
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/Serial.o lib/Serial.cpp
+
 ${OBJECTDIR}/lib/Str.o: lib/Str.cpp 
 	${MKDIR} -p ${OBJECTDIR}/lib
 	${RM} "$@.d"
@@ -79,11 +84,6 @@ ${OBJECTDIR}/modules/GetSystemConfiguration.o: modules/GetSystemConfiguration.cp
 	${MKDIR} -p ${OBJECTDIR}/modules
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/GetSystemConfiguration.o modules/GetSystemConfiguration.cpp
-
-${OBJECTDIR}/modules/Serial.o: modules/Serial.cpp 
-	${MKDIR} -p ${OBJECTDIR}/modules
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/Serial.o modules/Serial.cpp
 
 # Subprojects
 .build-subprojects:
