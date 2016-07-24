@@ -1,0 +1,130 @@
+<div ng-controller="overviewTab"> 
+		<div class="panel panel-primary">
+		<div class="panel-heading">General Info</div>
+		<div class="panel-body"  >
+				<div class="row">
+						<div class="col-xs-6 col-md-8">
+							
+								<table class="table table-striped table-condensed">
+										<thead>
+												<tr>
+														<th>Server Info</th>
+														<th></th>
+														<th></th>
+														<th></th>
+														<th></th>
+												</tr>
+										</thead>
+										<tbody >
+												<tr>
+														<td>Host</td>
+														<td>{{ hostInfo.Host.hostname }}</td>
+														<td></td>
+														<td></td>
+														<td></td>
+												</tr>
+												<tr>
+														<td>Kernel</td>
+														<td>{{ hostInfo.Host.kernel }}</td>
+														<td></td>
+														<td></td>
+														<td></td>
+												</tr>
+												<tr>
+												<th>Cpu</th>
+														<td>{{ hostInfo.cpuInfo['Model name']}}</td>
+														<th></th>
+														<th></th>
+														<th></th>
+												</tr>
+												<tr>
+														<td>Min Clock</td>
+														<td>{{ hostInfo.cpuInfo['CPU min MHz']  /1000 | number:2}} GHz </td>
+														<td>max Clock</td>
+														<td>{{ hostInfo.cpuInfo['CPU max MHz']  /1000 | number:2}} GHz </td>
+												</tr>
+												<tr>
+													<td>Total Ram</td>
+													<td>Free Ram</td>
+													<td>Total Swap</td>
+													<td>Free Swap</td>
+												</tr>
+												<tr>
+														<td>{{ hostInfo.Memory.totalRam /1024 | number:2}} GB</td>
+														<td>{{ hostInfo.Memory.freeRam /1024 | number:2 }} GB</td>
+														<td>{{ hostInfo.Memory.totalSwap /1024 | number:2 }} GB </td>
+														<td>{{ hostInfo.Memory.freeSwap /1024 | number:2 }} GB </td>
+												</tr>
+										</tbody>
+								</table>
+						</div>
+						<div class="col-xs-6 col-md-4">
+									<div id="doughnut">
+										<canvas class="chart chart-doughnut" chart-colors="colors" chart-title="teste" chart-options="options" chart-data="data" chart-labels="labels" ></canvas>
+									<div id="doughnutLoad">
+										<div class="load">CPU {{ hostInfo.Load.cpu | number:2 }} %</div>
+									</div>
+								</div>
+							
+				</div>
+		</div>
+		</div>
+		<div class="panel panel-primary">
+		<div class="panel-heading " ng-controller="overviewTab">Process List</div>
+				<table class="table table-striped table-condensed scroll">
+						<thead>
+								<tr>
+										<th >Pid</th>
+										<th><input type="text" class="form-control" placeholder="User" ng-model="usr" /></th>
+										<th><input type="text" class="form-control input-busca" placeholder="Command" ng-model="comm" /></th>
+										<th><a id="sortCpu"><span  class="glyphicon glyphicon-sort" ng-click="sortBy('mem')">Mem (MB)</span></a></th>
+										<th><a id="sortCpu"> <span  class="glyphicon glyphicon-sort" ng-click="sortBy('cpu')">Cpu</span></a></th>
+								</tr>
+						</thead>
+						<tbody>
+								<tr ng-repeat="ps in hostInfo.Proccess | filter: {'command':comm} | filter: {'user':usr} |  orderBy:propertyName:reverse">
+										<td>{{  ps.pid }}</td>
+										<td>{{  ps.user }}</td>
+										<td>{{  ps.tty }} - {{  ps.command }}</td>
+										<td>{{  ps.mem  }}</td>
+										<td>{{  ps.cpu }} </td>
+								</tr>
+						</tbody>
+							<tfoot>
+								<tr>
+									<td></td>
+									<td></td>
+									<td>Total Process {{ hostInfo.Proccess.length }} </td>
+									<!-- Isto Foi uma Gambiarra do Cão, Não consegui fazer no Controller -->
+									<td>Filtered Process {{ (hostInfo.Proccess|filter: {'user':usr}|filter:{'command':comm}).length}}</td>
+									<td>Cpu {{ sumFilteredCpu }}</td>
+									<td>{{  cpu }} </td>
+								</tr> 
+						</tfoot>
+				</table>
+									
+		</div> 
+		<div class="panel panel-primary">
+				<div class="panel-heading">Disk Stats</div>
+				<table class="table table-striped table-condensed">
+						<thead>
+								<tr>
+										<th>FileSystem</th>
+										<th>Size</th>
+										<th>Used</th>
+										<th>Available</th>
+										<th>Mount point</th>
+								</tr>
+						</thead>
+						<tbody >
+								<tr ng-repeat="fileSystem in hostInfo.Disk">
+										<td>{{ fileSystem.fs }}</td>
+										<td>{{ fileSystem.size }}</td>
+										<td>{{ fileSystem.used }} </td>
+										<td>{{ fileSystem.available }} </td>
+										<td>{{ fileSystem.mounted }} </td>
+								</tr>
+						</tbody>
+				</table>
+		</div>
+</div>
