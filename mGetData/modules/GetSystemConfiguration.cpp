@@ -30,7 +30,6 @@ string GetSystemConfiguration::getAll() {
 	string buffer = getHost().c_str();
 	buffer+= getCpuInfo();
 	string json = s.replace(buffer, search, replace);
-//	json[(strlen(json.c_str())-1)] = ' ';
 	buffer = json;
 	buffer+= getDiskInfo();
 	json = s.replace(buffer, search, replace);
@@ -64,14 +63,6 @@ string GetSystemConfiguration::getCpuInfo() {
 
 string GetSystemConfiguration::getProcessList(){
 	Str s;
-//	string sysReq = "ps --no-headers -eo  \"{ \\""\"pid\\""\" : %p, "
-//		"\\""\"user\\""\" : \\""\"%U\\""\","
-//		"\\""\"tty\\""\" : \\""\"%y\\""\", "
-//		"\\""\"time\\""\" : \\""\"%x\\""\","
-//		"\\""\"command\\""\" : \\""\"%c\\""\", "
-//		"\\""\"mem\\""\" : \\""\"%z\\""\", "
-//		//"\\""\"args\\""\" : \\""\"%a\\""\","
-//		"\\""\"cpu\\""\" : %C},\" > /tmp/ps";
 	string sysReq = "ps --no-headers -aux | awk '{print\"{ \\""\"pid\\""\" : \"$2, \", "
 		"\\""\"user\\""\" : \\""\" \" $1 \" \\""\","
 		"\\""\"cpu\\""\" : \"  $3  \","
@@ -128,15 +119,12 @@ string GetSystemConfiguration::getMemInfo(){
 }
 
 string GetSystemConfiguration::getCpuLoad(){
-	//pega os valores do /proc/stat 
-	//Definir o calculo de uso de cpu
-	
 	Str s;
 	string json;
 	long double a[4], b[4], loadavg;
 	FILE *fp;
 	char dump[50];
-	
+
 	fp = fopen("/proc/stat","r");
 	fscanf(fp,"%*s %Lf %Lf %Lf %Lf",&a[0],&a[1],&a[2],&a[3]);
 	fclose(fp);

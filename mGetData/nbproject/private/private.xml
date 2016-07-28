@@ -7,19 +7,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/web/js/user-controller.js</file>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/web/css/app.css</file>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/web/index.html</file>
+            <file>file:/home/williamvolkweis/netdebug/mGetData/lib/NetStats.h</file>
             <file>file:/home/williamvolkweis/netdebug/mGetData/main.cpp</file>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/web/js/process-controller.js</file>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/web/js/user-service.js</file>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/web/js/mem-controller.js</file>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/web/js/cpu-controller.js</file>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/web/js/disk-controller.js</file>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/Makefile</file>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/web/js/app.js</file>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/web/js/group-controller.js</file>
-            <file>file:/home/williamvolkweis/netdebug/mGetData/web/css/main.css</file>
+            <file>file:/home/williamvolkweis/netdebug/mGetData/modules/GetSystemConfiguration.cpp</file>
+            <file>file:/home/williamvolkweis/netdebug/mGetData/lib/NetStats.cpp</file>
         </group>
     </open-files>
 </project-private>

@@ -13,6 +13,7 @@
 
 #include <cstdlib>
 #include "modules/GetSystemConfiguration.h"
+#include "lib/NetStats.h"
 #include <thread>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,13 +26,15 @@ void getStats();
 int main(int argc, char** argv) {
 	
 	thread server(initHttpServer);
-	//thread stats (getStats);
-	getStats();
+	NetStats netStats; 
+	
+	cout << netStats.getArpTable() <<endl;
+	//getStats();
     return 0;
 }
 
 void initHttpServer(){
-	system("http-server -c 1 -p 8800 web");
+	system("http-server -c 1 -p 8800 /usr/bin/netdebug/web");
 }
 void getStats(){
 Str s;

@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>modules/GetSystemConfiguration.h</itemPath>
+      <itemPath>lib/NetStats.h</itemPath>
       <itemPath>lib/Serial.h</itemPath>
     </logicalFolder>
     <logicalFolder name="lib" displayName="lib" projectFiles="true">
@@ -1954,6 +1955,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>modules/GetSystemConfiguration.cpp</itemPath>
+      <itemPath>lib/NetStats.cpp</itemPath>
       <itemPath>lib/Serial.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -11649,6 +11651,10 @@
       </packaging>
       <item path="TODO" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="lib/NetStats.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/NetStats.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="lib/Serial.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="lib/Serial.h" ex="false" tool="3" flavor2="0">
@@ -19036,6 +19042,10 @@
         </asmTool>
       </compileType>
       <item path="TODO" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/NetStats.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/NetStats.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="lib/Serial.cpp" ex="false" tool="1" flavor2="0">
       </item>

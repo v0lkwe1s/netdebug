@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/lib/NetStats.o \
 	${OBJECTDIR}/lib/Serial.o \
 	${OBJECTDIR}/lib/Str.o \
 	${OBJECTDIR}/main.o \
@@ -64,6 +65,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mgetdata: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mgetdata ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/lib/NetStats.o: lib/NetStats.cpp 
+	${MKDIR} -p ${OBJECTDIR}/lib
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/NetStats.o lib/NetStats.cpp
 
 ${OBJECTDIR}/lib/Serial.o: lib/Serial.cpp 
 	${MKDIR} -p ${OBJECTDIR}/lib
