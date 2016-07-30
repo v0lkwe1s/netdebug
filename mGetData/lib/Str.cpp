@@ -57,6 +57,13 @@ string Str::getFileText(string file) {
 	return text;
 }
 
+string Str::currentPath(){
+	char cwd[1024];
+	string path = getcwd(cwd, sizeof(cwd));
+	//return replace(path, "mGetData", "");
+	return path;
+}
+
 //para pegar uma linha que contenha um valor em especifico
 string Str::getLine(string file) {
     string line;

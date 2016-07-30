@@ -22,26 +22,50 @@ using namespace std;
 
 void initHttpServer();
 void getStats();
+void getNetStats();
 
 int main(int argc, char** argv) {
-	
+
 	thread server(initHttpServer);
-	NetStats netStats; 
-	
-	cout << netStats.getArpTable() <<endl;
-	//getStats();
+	thread system (getStats);
+	thread net (getNetStats);
+	for (;;){
+		sleep(1);
+	}
     return 0;
+}
+void getNetStats(){
+	Str s;
+	NetStats netStats; 
+	for (;;) {
+		string comm = s.currentPath();
+			comm+= "/web/json/iface.json";
+			cout << comm << endl;
+		s.createFileText(netStats.getIfaces(), comm);
+		sleep(1);
+	}
+	s.~Str();
+	
 }
 
 void initHttpServer(){
-	system("http-server -c 1 -p 8800 /usr/bin/netdebug/web");
+	Str s;
+	string comm = "http-server -c 1 -p 8800 "; 
+		comm+= s.currentPath();
+		comm+= "/web";
+		cout << "server\n";
+		cout << comm << endl;
+	system(comm.c_str());
+	s.~Str();
 }
 void getStats(){
-Str s;
+	Str s;
 	GetSystemConfiguration g;
 	for (;;) {
-		system(".");
-		s.createFileText(g.getAll(), "/usr/bin/netdebug/web/json/config.json");
+		string comm = s.currentPath();
+			comm+= "/web/json/config.json";
+			cout << comm << endl;
+		s.createFileText(g.getAll(), comm);
 		sleep(1);
 	}
 	g.~GetSystemConfiguration();

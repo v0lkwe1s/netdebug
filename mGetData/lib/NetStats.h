@@ -22,12 +22,9 @@ public:
   NetStats();
   NetStats(const NetStats& orig);
   virtual ~NetStats();
-  string getLocalIp(){
-    Str s;
-    string ip;
-    ip = "192.168.1.1";
-    return ip;
-  }
+  
+  string getIfaces();
+  
   string getArpTable();
   
 private:

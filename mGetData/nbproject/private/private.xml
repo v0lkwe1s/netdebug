@@ -7,10 +7,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/williamvolkweis/netdebug/mGetData/web/templates/users.html</file>
             <file>file:/home/williamvolkweis/netdebug/mGetData/lib/NetStats.h</file>
+            <file>file:/home/williamvolkweis/netdebug/mGetData/web/templates/entries.html</file>
+            <file>file:/home/williamvolkweis/netdebug/mGetData/lib/Str.h</file>
+            <file>file:/home/williamvolkweis/netdebug/mGetData/web/templates/overview.html</file>
+            <file>file:/home/williamvolkweis/netdebug/mGetData/lib/Str.cpp</file>
+            <file>file:/home/williamvolkweis/netdebug/mGetData/lib/Serial.cpp</file>
             <file>file:/home/williamvolkweis/netdebug/mGetData/main.cpp</file>
             <file>file:/home/williamvolkweis/netdebug/mGetData/modules/GetSystemConfiguration.cpp</file>
             <file>file:/home/williamvolkweis/netdebug/mGetData/lib/NetStats.cpp</file>
+            <file>file:/home/williamvolkweis/netdebug/mGetData/web/templates/serverInfo.html</file>
         </group>
     </open-files>
 </project-private>

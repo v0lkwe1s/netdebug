@@ -17,6 +17,10 @@ app.config(function($routeProvider, $locationProvider){
             templateUrl : 'templates/users.html',
             controller     : "UserCtrl",
         })
+				.when('/net', {
+            templateUrl : 'templates/net.html',
+            controller     : "NetCtrl",
+        })
         .when('/userGroup', {
             templateUrl : 'templates/userGroup.html',
             controller     : "UserGroupCtrl",
@@ -54,6 +58,14 @@ app.controller('overviewTab', function($rootScope, $http, $scope, $location, $in
 		//Não consegui fazer a soma de todos os valores filtrados
 		$scope.sumFilteredCpu = 1;
 		$scope.determinateValue = 30;
+});
+app.controller('NetCtrl', function($rootScope, $location) {
+    $rootScope.activetab = $location.path();
+		$interval(function () {
+			$http.get("json/iface.json").then(function(response) {
+					$scope.hostInfo = response.data;
+			})
+	 	}, 1000);
 });
 
 app.controller('EntriesCtrl', function($rootScope, $location) {

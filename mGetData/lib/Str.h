@@ -18,6 +18,9 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <limits.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -35,10 +38,9 @@ public:
     string getFileText(string file);
     string subString(string t, string s);
     string getLine(string file);
-    //text ---> text to write, file --> file and extension
     void createFileText(string text, string file);
     string replace(string& subject, const string& search,const string& replace);
-    
+    string currentPath();
 private:
     
 };
