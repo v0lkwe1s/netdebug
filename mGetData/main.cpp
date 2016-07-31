@@ -14,6 +14,7 @@
 #include <cstdlib>
 #include "modules/GetSystemConfiguration.h"
 #include "lib/NetStats.h"
+#include "lib/DbSqlite.h"
 #include <thread>
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,26 +27,30 @@ void getNetStats();
 
 int main(int argc, char** argv) {
 
+	DbSqlite sql;
+	sql.open();
+	sql.insert("insert into user (username, password) values ('teste', 'teste')");
+	sql.close();
 	thread server(initHttpServer);
 	thread system (getStats);
 	thread net (getNetStats);
+	
 	for (;;){
 		sleep(1);
 	}
     return 0;
 }
+
 void getNetStats(){
 	Str s;
 	NetStats netStats; 
 	for (;;) {
 		string comm = s.currentPath();
 			comm+= "/web/json/iface.json";
-			cout << comm << endl;
 		s.createFileText(netStats.getIfaces(), comm);
 		sleep(1);
 	}
 	s.~Str();
-	
 }
 
 void initHttpServer(){
@@ -54,7 +59,6 @@ void initHttpServer(){
 		comm+= s.currentPath();
 		comm+= "/web";
 		cout << "server\n";
-		cout << comm << endl;
 	system(comm.c_str());
 	s.~Str();
 }
@@ -64,7 +68,6 @@ void getStats(){
 	for (;;) {
 		string comm = s.currentPath();
 			comm+= "/web/json/config.json";
-			cout << comm << endl;
 		s.createFileText(g.getAll(), comm);
 		sleep(1);
 	}

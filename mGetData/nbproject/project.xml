@@ -12,6 +12,7 @@
             <sourceRootList>
                 <sourceRootElem>lib</sourceRootElem>
                 <sourceRootElem>web</sourceRootElem>
+                <sourceRootElem>Database</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

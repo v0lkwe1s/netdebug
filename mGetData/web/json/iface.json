@@ -1,4 +1,4 @@
-{"arp":[{"iface": "eth0","MTU": "1500","RX-OK": "1554556","RX-ERR": "0","RX-DRP": "1","RX-OVR": "0","TX-OK": "896492","TX-ERR": "0","TX-DRP": "0","TX-OVR": "0","Flg": "BMRU"},
-{"iface": "lo","MTU": "65536","RX-OK": "363092","RX-ERR": "0","RX-DRP": "0","RX-OVR": "0","TX-OK": "363092","TX-ERR": "0","TX-DRP": "0","TX-OVR": "0","Flg": "LRU"},
-{"iface": "wlan0","MTU": "1500","RX-OK": "121681","RX-ERR": "0","RX-DRP": "3","RX-OVR": "0","TX-OK": "7138","TX-ERR": "0","TX-DRP": "0","TX-OVR": "0","Flg": "BMRU"} 
+{"arp":[{"iface": "eth0","MTU": "1500","RX-OK": "401662","RX-ERR": "0","RX-DRP": "0","RX-OVR": "0","TX-OK": "234772","TX-ERR": "0","TX-DRP": "0","TX-OVR": "0","Flg": "BMRU"},
+{"iface": "lo","MTU": "65536","RX-OK": "251817","RX-ERR": "0","RX-DRP": "0","RX-OVR": "0","TX-OK": "251817","TX-ERR": "0","TX-DRP": "0","TX-OVR": "0","Flg": "LRU"},
+{"iface": "wlan0","MTU": "1500","RX-OK": "54651","RX-ERR": "0","RX-DRP": "0","RX-OVR": "0","TX-OK": "3596","TX-ERR": "0","TX-DRP": "0","TX-OVR": "0","Flg": "BMRU"} 
 ]}
