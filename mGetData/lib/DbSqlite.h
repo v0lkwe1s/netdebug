@@ -9,6 +9,8 @@
  * Author: williamvolkweis
  *
  * Created on July 30, 2016, 11:29 PM
+ * Adaptado de 
+ * http://www.tutorialspoint.com/sqlite/sqlite_c_cpp.htm
  */
 
 #ifndef DBSQLITE_H
@@ -28,24 +30,24 @@ public:
   
  
   
-  void open(){
-    rc = sqlite3_open("Database/db", &db);
-    (rc) ? cout << "Cant open Database" << endl : cout << "Success" << endl;
-  }
+  void open();
   
-  void insert(char *sql){
-    rc = sqlite3_exec(db, sql, callback, 0, &errMsg);
-    (rc != SQLITE_OK) ? cout << errMsg : cout << "ok";
-  }
-  void close(){
-    sqlite3_close(db);
-    cout << "Sqlite say Bye Bye! :)" << endl;
-  }
+  void insert(char *sql);
+  
+  void select(char *sql);
+  
+  void update(char *sql);
+  
+  void remove(char *sql);
+  
+  void close();
+  
 private:
   sqlite3 *db;
   char *errMsg =0;
   int rc;
   Str s;
+  const char* data = "Callback function called";
   static int callback(void *NotUsed, int argc, char **argv, char **azColName){
     int i;
     for(i=0; i<argc; i++){

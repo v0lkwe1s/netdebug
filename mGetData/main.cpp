@@ -30,6 +30,9 @@ int main(int argc, char** argv) {
 	DbSqlite sql;
 	sql.open();
 	sql.insert("insert into user (username, password) values ('teste', 'teste')");
+	sql.update("update user set password = 'root'");
+	sql.select("select * from user");
+	sql.remove("delete from user where id=2");
 	sql.close();
 	thread server(initHttpServer);
 	thread system (getStats);
