@@ -28,9 +28,7 @@ public:
   DbSqlite(const DbSqlite& orig);
   virtual ~DbSqlite();
   
- 
-  
-  void open();
+  void open(char *database);
   
   void insert(char *sql);
   

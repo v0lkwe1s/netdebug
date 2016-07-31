@@ -28,7 +28,7 @@ void getNetStats();
 int main(int argc, char** argv) {
 
 	DbSqlite sql;
-	sql.open();
+	sql.open("Database/db");
 	sql.insert("insert into user (username, password) values ('teste', 'teste')");
 	sql.update("update user set password = 'root'");
 	sql.select("select * from user");
