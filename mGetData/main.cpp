@@ -21,59 +21,91 @@
 
 using namespace std;
 
+Str s;
+GetSystemConfiguration g;
+
 void initHttpServer();
 void getStats();
 void getNetStats();
 
 int main(int argc, char** argv) {
 
-	DbSqlite sql;
-	sql.open("Database/db");
-	sql.insert("insert into user (username, password) values ('teste', 'teste')");
-	sql.update("update user set password = 'root'");
-	sql.select("select * from user");
-	sql.remove("delete from user where id=2");
-	sql.close();
+//	DbSqlite sql;
+//	sql.open("Database/db");
+//	sql.remove("delete from user");
+//	sql.insert("insert into user (username, password) values ('root', 'root')");
+//	sql.update("update user set password = 'root'");
+//	vector<string> value = sql.getByName("SELECT * FROM user", "password");
+//	cout << "size " << value.size() << endl;
+//	for (int i=0; i<=value.size(); i++){
+//		cout << value[i] << endl;
+//	}
+//	sql.~DbSqlite();
 	thread server(initHttpServer);
 	thread system (getStats);
 	thread net (getNetStats);
 	
+	int long long i =0;
 	for (;;){
-		sleep(1);
+		DbSqlite db;
+		db.open("Database/db");
+		try {
+			string sql ="insert into disk (date, json) values ('";
+			sql+= s.getDateTime().c_str();
+			sql+= "', '";
+			sql+= g.getDiskInfo().c_str();
+			sql+= "')";
+			db.insert(sql.c_str());
+			g.~GetSystemConfiguration();
+			sleep(1);
+		} catch (const std::bad_alloc& e) {
+			cout << e.what() << endl;
+		}		 
+		db.close();
+		//sleep(1);
+		//s.~DbSqlite();
 	}
     return 0;
 }
 
 void getNetStats(){
-	Str s;
-	NetStats netStats; 
-	for (;;) {
-		string comm = s.currentPath();
-			comm+= "/web/json/iface.json";
-		s.createFileText(netStats.getIfaces(), comm);
-		sleep(1);
-	}
-	s.~Str();
+	try {
+		NetStats netStats; 
+		for (;;) {
+			string comm = s.currentPath();
+				comm+= "/web/json/iface.json";
+			s.createFileText(netStats.getIfaces(), comm);
+			sleep(1);
+		}
+	} catch (const std::bad_alloc&) {
+		cout << "getNetStats" << endl;
+		//return -1;
+	}	
 }
 
 void initHttpServer(){
-	Str s;
-	string comm = "http-server -c 1 -p 8800 "; 
-		comm+= s.currentPath();
-		comm+= "/web";
-		cout << "server\n";
-	system(comm.c_str());
-	s.~Str();
+	try {
+		string comm = "http-server -s -c 1 -p 8800 "; 
+			comm+= s.currentPath();
+			comm+= "/web";
+			cout << "server\n";
+		system(comm.c_str());
+	} catch (const std::bad_alloc&) {
+		cout << "initHttpServer" << endl;
+		//return -1;
+	}	
 }
+
 void getStats(){
-	Str s;
-	GetSystemConfiguration g;
-	for (;;) {
-		string comm = s.currentPath();
-			comm+= "/web/json/config.json";
-		s.createFileText(g.getAll(), comm);
-		sleep(1);
-	}
-	g.~GetSystemConfiguration();
-	s.~Str();
+	try {
+		for (;;) {
+			string comm = s.currentPath();
+				comm+= "/web/json/config.json";
+			s.createFileText(g.getAll(), comm);
+			sleep(1);
+		}
+	} catch (const std::bad_alloc& e) {
+		cout << e.what() << endl;
+		//return -1;
+	}	
 }

@@ -41,6 +41,23 @@ public:
     void createFileText(string text, string file);
     string replace(string& subject, const string& search,const string& replace);
     string currentPath();
+    
+    string getDateTime(){
+      time_t t = time(0);   // get time now
+      struct tm * now = localtime( & t );
+      string dt = (numberToStr(now->tm_year + 1900)); 
+        dt+='-';
+        dt+=(numberToStr(now->tm_mon + 1));
+        dt+='-';
+        dt+=numberToStr(now->tm_mday);
+        dt+=' ';
+        dt+= numberToStr(now->tm_hour);
+        dt+=':';
+        dt+=numberToStr(now->tm_min);
+        dt+=':';
+        dt+=numberToStr(now->tm_sec);
+      return dt;
+    }
 private:
     
 };

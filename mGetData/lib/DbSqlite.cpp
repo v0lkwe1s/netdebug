@@ -21,33 +21,37 @@ DbSqlite::DbSqlite(const DbSqlite& orig){
 
 void DbSqlite::remove(char* sql){
 	rc = sqlite3_exec(db, sql, callback, (void*) data, &errMsg);
-	(rc != SQLITE_OK) ? cout << errMsg : cout << "ok" << endl;
+	(rc != SQLITE_OK) ? cout << errMsg : cout << "";
 }
 
 void DbSqlite::open(char *database){
 	rc = sqlite3_open(database, &db);
-	(rc) ? cout << "Cant open Database" << endl : cout << "Success" << endl;
+	(rc) ? cout << "Cant open Database" << endl : cout << "";
 }
 
-void DbSqlite::insert(char* sql){
+void DbSqlite::insert(const char* sql){
+	try {
 	rc = sqlite3_exec(db, sql, callback, 0, &errMsg);
-	(rc != SQLITE_OK) ? cout << errMsg : cout << "ok" << endl; 
+	(rc != SQLITE_OK) ? cout << errMsg : cout << ""; 
+	} catch (exception e){
+		cout << e.what() << endl;
+	}
+	
 }
 
-void DbSqlite::select(char* sql){
-	rc = sqlite3_exec(db, sql, callback, (void*) data, &errMsg);
-	(rc != SQLITE_OK) ? cout << errMsg : cout << "ok" << endl;
+void DbSqlite::selectAll(char* sql){
+	rc = sqlite3_exec(db, sql, callback, (void*)data, &errMsg);
+	(rc != SQLITE_OK) ? cout << errMsg : cout << "";
 }
 
 void DbSqlite::update(char* sql){
 	rc = sqlite3_exec(db, sql, callback, (void*) data, &errMsg);
-	(rc != SQLITE_OK) ? cout << errMsg : cout << "ok" << endl;
+	(rc != SQLITE_OK) ? cout << errMsg : cout << "";
 }
 
 void DbSqlite::close()
 {
 	sqlite3_close(db);
-	cout << "Exiting !!!" << endl;
 }
 
 DbSqlite::~DbSqlite(){

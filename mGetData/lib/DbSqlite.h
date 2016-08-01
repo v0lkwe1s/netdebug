@@ -28,11 +28,28 @@ public:
   DbSqlite(const DbSqlite& orig);
   virtual ~DbSqlite();
   
+  vector<string> getByName(char *sql, string name){
+    sqlite3_stmt *stmt;
+    rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
+    (rc != SQLITE_OK) ? cout << errMsg : cout << "ok" << endl;
+    vector<string> id;
+    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+      for(int i=0; i <= sqlite3_column_count(stmt) -1; i++){
+        if (strcmp(sqlite3_column_name(stmt, i), name.c_str()) == 0){
+          string v((char *)sqlite3_column_text(stmt, i));
+          cout << v << endl;
+          id.push_back(v);
+        }
+      }
+    }
+    return id;
+  }
+  
   void open(char *database);
   
-  void insert(char *sql);
+  void insert(const char *sql);
   
-  void select(char *sql);
+  void selectAll(char *sql);
   
   void update(char *sql);
   
@@ -42,6 +59,7 @@ public:
   
 private:
   sqlite3 *db;
+
   char *errMsg =0;
   int rc;
   Str s;
