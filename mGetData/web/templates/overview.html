@@ -1,2 +1,50 @@
 <div class="load">Host {{ hostInfo.Host.hostname }}</div>
 <div class="load">CPU {{ hostInfo.Load.cpu | number:2 }} %</div>
+<table class="table">
+	<thead>
+		<th> filesystem</th>
+		<th> Size</th>
+		<th> used</th>
+		<th> available</th>
+		<th> mounted</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="disk in DiskInfo.disk" >
+			<td >{{ disk.fs }} </td>
+			<td >{{ disk.size }} </td>
+			<td >{{ disk.used }} </td>
+			<td >{{ disk.available }} </td>
+			<td >{{ disk.mounted }} </td>
+			
+		</tr>
+	</tbody>
+</table>
+
+<table class="table">
+	<thead>
+		<th> iface</th>
+		<th> MTU</th>
+		<th> RX-OK</th>
+		<th> RX-ERR</th>
+		<th> RX-DRP</th>
+		<th> RX-OVR</th>
+		<th> TX-OK </th>
+		<th> TX-ERR</th>
+		<th> TX-DRP</th>
+		<th> TX-OVR</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="iface in InetIface.interfaces" >
+			<td >{{ iface['iface'] }} </td>
+			<td >{{ iface['MTU'] }} </td>
+			<td >{{ iface['RX-OK'] }} </td>
+			<td >{{ iface['RX-ERR'] }} </td>
+			<td >{{ iface['RX-DRP'] }} </td>
+			<td >{{ iface['RX-OVR'] }} </td>
+			<td >{{ iface['TX-OK'] }} </td>
+			<td >{{ iface['TX-ERR'] }} </td>
+			<td >{{ iface['TX-DRP'] }} </td>
+			<td >{{ iface['TX-OVR'] }} </td>
+		</tr>
+	</tbody>
+</table>

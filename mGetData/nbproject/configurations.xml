@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>lib/DbSqlite.h</itemPath>
+      <itemPath>lib/DiskStats.h</itemPath>
       <itemPath>modules/GetSystemConfiguration.h</itemPath>
       <itemPath>lib/NetStats.h</itemPath>
       <itemPath>lib/Serial.h</itemPath>
@@ -77,6 +78,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>lib/DbSqlite.cpp</itemPath>
+      <itemPath>lib/DiskStats.cpp</itemPath>
       <itemPath>modules/GetSystemConfiguration.cpp</itemPath>
       <itemPath>lib/NetStats.cpp</itemPath>
       <itemPath>lib/Serial.cpp</itemPath>
@@ -9781,6 +9783,10 @@
       </item>
       <item path="lib/DbSqlite.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="lib/DiskStats.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/DiskStats.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="lib/NetStats.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="lib/NetStats.h" ex="false" tool="3" flavor2="0">
@@ -9934,6 +9940,10 @@
       <item path="lib/DbSqlite.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="lib/DbSqlite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/DiskStats.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/DiskStats.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="lib/NetStats.cpp" ex="false" tool="1" flavor2="0">
       </item>

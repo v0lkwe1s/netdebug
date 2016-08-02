@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/lib/DbSqlite.o \
+	${OBJECTDIR}/lib/DiskStats.o \
 	${OBJECTDIR}/lib/NetStats.o \
 	${OBJECTDIR}/lib/Serial.o \
 	${OBJECTDIR}/lib/Str.o \
@@ -71,6 +72,11 @@ ${OBJECTDIR}/lib/DbSqlite.o: lib/DbSqlite.cpp
 	${MKDIR} -p ${OBJECTDIR}/lib
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/DbSqlite.o lib/DbSqlite.cpp
+
+${OBJECTDIR}/lib/DiskStats.o: lib/DiskStats.cpp 
+	${MKDIR} -p ${OBJECTDIR}/lib
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/DiskStats.o lib/DiskStats.cpp
 
 ${OBJECTDIR}/lib/NetStats.o: lib/NetStats.cpp 
 	${MKDIR} -p ${OBJECTDIR}/lib

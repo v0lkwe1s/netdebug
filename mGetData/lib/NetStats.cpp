@@ -70,7 +70,7 @@ string NetStats::getIfaces()
 	char buff[512];
 
 	in = popen(comm.c_str(), "r");
-	string json = "{\"arp\":[";
+	string json = "{\"interfaces\":[";
 	while (fgets(buff, sizeof(buff), in) != NULL) {
 		json += buff;
 	}

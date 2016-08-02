@@ -17,6 +17,12 @@ app.controller('overviewTab', function($rootScope, $http, $scope, $location, $in
 			$http.get("json/config.json").then(function(response) {
 				$scope.hostInfo = response.data;
 			});
+			$http.get("json/disk.json").then(function(response) {
+				$scope.DiskInfo = response.data;
+			});
+			$http.get("json/iface.json").then(function(response) {
+				$scope.InetIface = response.data;
+			});
     }, 1000);
 
     $rootScope.sortBy = function(propertyName) {
