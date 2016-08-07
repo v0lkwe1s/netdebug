@@ -31,12 +31,11 @@ void DbSqlite::open(char *database){
 
 void DbSqlite::insert(const char* sql){
 	try {
-	rc = sqlite3_exec(db, sql, callback, 0, &errMsg);
-	(rc != SQLITE_OK) ? cout << errMsg : cout << ""; 
+		rc = sqlite3_exec(db, sql, callback, 0, &errMsg);
+		(rc != SQLITE_OK) ? cout << errMsg : cout << ""; 
 	} catch (exception e){
 		cout << e.what() << endl;
 	}
-	
 }
 
 void DbSqlite::selectAll(char* sql){
@@ -45,6 +44,11 @@ void DbSqlite::selectAll(char* sql){
 }
 
 void DbSqlite::update(char* sql){
+	rc = sqlite3_exec(db, sql, callback, (void*) data, &errMsg);
+	(rc != SQLITE_OK) ? cout << errMsg : cout << "";
+}
+
+void DbSqlite::query(char* sql){
 	rc = sqlite3_exec(db, sql, callback, (void*) data, &errMsg);
 	(rc != SQLITE_OK) ? cout << errMsg : cout << "";
 }

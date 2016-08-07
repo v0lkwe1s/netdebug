@@ -28,7 +28,7 @@ public:
   string getArpTable();
   
 private:
-
+  Str s;
 };
 
 #endif /* NETSTATS_H */

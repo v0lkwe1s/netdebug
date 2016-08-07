@@ -55,6 +55,8 @@ public:
   
   void remove(char *sql);
   
+  void query(char *sql);
+  
   void close();
   
 private:

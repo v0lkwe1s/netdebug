@@ -24,15 +24,17 @@ NetStats::NetStats(const NetStats& orig)
 NetStats::~NetStats()
 {
 }
-//nesta seção de rede tento fazer algo mais profissional, não jogando a saida para
-//um arquivo, e sim, lendo o retorno da função system inclusa em popen
+//De acordo com a documentação do arp, recomenda-se utilizar o ip neigh para verificar 
+// a tabela arp. neste caso estou trazendo todas as conexoes, mas da para filtrar adicionando
+// um nud ficando o comando -> ip neighbour show nud reachable
 string NetStats::getArpTable()
 {
-	string comm = "cat /proc/net/arp | awk 'NR>1 {print "
+	string comm = "ip neighbour show | awk 'NR>1 {print "
 		 "\"{\\"
 		 "\"host\\""\": \\""\"\" $1 \"""\\""""\","
-		 "\\""\"mac\\""\": \\""\"\" $4 \"""\\""""\","
-		 "\\""\"iface\\""\": \\""\"\" $6 \"""\\""""\""
+		 "\\""\"mac\\""\": \\""\"\" $5 \"""\\""""\","
+		 "\\""\"iface\\""\": \\""\"\" $3 \"""\\""""\""
+		 "\\""\"state\\""\": \\""\"\" $6 \"""\\""""\""
 		 "},\"""}'";
 
 	FILE *in;
@@ -44,8 +46,11 @@ string NetStats::getArpTable()
 	}
 	pclose(in);
 	json[(strlen(json.c_str()) - 2)] = ' ';
-	json += "]}";
-
+	//remove as quebras de linha para enviar tudo via Socket
+	json = s.replace(json,"\n\0"," ");
+	//Adiciona quebra de linha no final do arquivo, que é para o cliente socket
+	// saber que terminou a string
+	json += "]}\n\0";
 	return json;
 }
 
