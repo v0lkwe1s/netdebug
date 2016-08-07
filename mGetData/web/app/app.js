@@ -23,6 +23,9 @@ app.controller('overviewTab', function($rootScope, $http, $scope, $location, $in
 			$http.get("json/iface.json").then(function(response) {
 				$scope.InetIface = response.data;
 			});
+			$http.get("json/arp.json").then(function(response) {
+				$scope.InetArp = response.data;
+			});
     }, 1000);
 
     $rootScope.sortBy = function(propertyName) {

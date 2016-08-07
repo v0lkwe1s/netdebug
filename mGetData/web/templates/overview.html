@@ -48,3 +48,19 @@
 		</tr>
 	</tbody>
 </table>
+
+<table class="table">
+	<thead>
+		<th> Host</th>
+		<th> Mac</th>
+		<th> iface</th>
+
+	</thead>
+	<tbody>
+		<tr ng-repeat="arp in InetArp.arp" >
+			<td >{{ arp['host'] }} </td>
+			<td >{{ arp['mac'] }} </td>
+			<td >{{ arp['iface'] }} </td>
+		</tr>
+	</tbody>
+</table>
