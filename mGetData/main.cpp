@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   main.cpp
- * Author: williamvolkweis
- *
- * Created on May 8, 2016, 4:58 PM
- */
-
 #include <cstdlib>
 #include "modules/GetSystemConfiguration.h"
 #include "lib/NetStats.h"
@@ -19,6 +6,8 @@
 #include <thread>
 #include <stdio.h>
 #include <stdlib.h>
+#include "lib/SocketException.h"
+#include "lib/ServerSocket.h"
 
 using namespace std;
 
@@ -29,7 +18,8 @@ void initHttpServer();
 void getStats();
 void getNetStats();
 void getFileSystemInfo();
-
+void getArpTable();
+void serverSocket();
 
 int main(int argc, char** argv) {
 
@@ -44,21 +34,38 @@ int main(int argc, char** argv) {
 //		cout << value[i] << endl;
 //	}
 //	sql.~DbSqlite();
-	thread server(initHttpServer);
-	//thread system (getStats);
+	thread server(serverSocket);
+	thread system (getStats);
 	thread net (getNetStats);
+	thread arp (getArpTable);
 	thread disk (getFileSystemInfo);
-	unsigned long int i;
+	
+	unsigned long int i =0;
 	for (;;){
 		cout << i++ << endl;
-		cout << "Node Server - " << server.get_id() << endl;
-		cout << "Net Stats   - " << net.get_id() << endl;
-		cout << "Disk Stats  - " << disk.get_id() << endl;
+		//cout << "Node Server - " << server.get_id() << endl;
+		//cout << "Net Stats   - " << net.get_id() << endl;
+		//cout << "Disk Stats  - " << disk.get_id() << endl;
+		//cout << "Arp Table   - " << arp.get_id() << endl;
+		//cout << "All Stats   - " << system.get_id() << endl;
 		sleep(1);
 	}
     return 0;
 }
-
+void getArpTable(){
+		try {
+		NetStats netStats; 
+		for (;;) {
+			string comm = s.currentPath();
+				comm+= "/web/json/arp.json";
+			s.createFileText(netStats.getArpTable(),comm);
+			sleep(1);
+		}
+		netStats.~NetStats();
+	} catch (const std::bad_alloc&) {
+		cout << "getArpTable" << endl;
+	}
+}
 void getNetStats(){
 	try {
 		NetStats netStats; 
@@ -94,6 +101,7 @@ void getStats(){
 			string comm = s.currentPath();
 				comm+= "/web/json/config.json";
 			s.createFileText(g.getAll(), comm);
+			sleep(1);
 		}
 	} catch (const std::bad_alloc& e) {
 		cout << e.what() << endl;
@@ -126,4 +134,38 @@ void getFileSystemInfo(){
 		}
 		sleep(1);
 	}
+}
+
+void serverSocket(){
+	std::cout << "running....\n";
+	try {
+		ServerSocket server(30000);
+		NetStats netStats;
+		while (true){
+			ServerSocket new_sock;
+			server.accept (new_sock);
+			try {
+				while (true){
+					
+					std::string data;
+					new_sock >> data;
+					cout << data << endl;
+					data = "HTTP/1.1 200 OK\r\n";
+					//data+= "Content-Type: application/json\r\n";
+					data+= "Connection: close\r\n\r\n";
+						 //data+=netStats.getArpTable();
+					cout << netStats.getArpTable() << endl;
+					data = netStats.getArpTable().c_str();
+					new_sock << data;
+					
+					break;
+				}
+			}
+			catch (SocketException&) {}
+			netStats.~NetStats();
+		}
+	}
+	catch (SocketException& e) {
+      std::cout << "Exception was caught:" << e.description() << "\nExiting.\n";
+    }
 }
