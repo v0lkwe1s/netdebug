@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include "lib/SocketException.h"
 #include "lib/ServerSocket.h"
+#include "modules/replicador/SendData.h"
+#include "modules/SquidParser.h"
 
 using namespace std;
 
@@ -20,37 +22,44 @@ void getNetStats();
 void getFileSystemInfo();
 void getArpTable();
 void serverSocket();
+void proxy();
 
 int main(int argc, char** argv) {
 
-//	DbSqlite sql;
-//	sql.open("Database/db");
-//	sql.remove("delete from user");
-//	sql.insert("insert into user (username, password) values ('root', 'root')");
-//	sql.update("update user set password = 'root'");
-//	vector<string> value = sql.getByName("SELECT * FROM user", "password");
-//	cout << "size " << value.size() << endl;
-//	for (int i=0; i<=value.size(); i++){
-//		cout << value[i] << endl;
-//	}
-//	sql.~DbSqlite();
 	thread server(serverSocket);
+	thread serverHttp(initHttpServer);
 	thread system (getStats);
 	thread net (getNetStats);
 	thread arp (getArpTable);
-	thread disk (getFileSystemInfo);
-	
+	//thread disk (getFileSystemInfo);
+	thread squidProxy (proxy);
 	unsigned long int i =0;
+	
 	for (;;){
 		cout << i++ << endl;
-		//cout << "Node Server - " << server.get_id() << endl;
-		//cout << "Net Stats   - " << net.get_id() << endl;
-		//cout << "Disk Stats  - " << disk.get_id() << endl;
-		//cout << "Arp Table   - " << arp.get_id() << endl;
-		//cout << "All Stats   - " << system.get_id() << endl;
+//		cout << "Node Server - " << server.get_id() << endl;
+//		cout << "Net Stats   - " << net.get_id() << endl;
+//		cout << "Disk Stats  - " << disk.get_id() << endl;
+//		cout << "Arp Table   - " << arp.get_id() << endl;
+		cout << "squid       - " << squidProxy.get_id() << endl;
+//		cout << "All Stats   - " << system.get_id() << endl;
 		sleep(1);
 	}
     return 0;
+}
+void proxy(){
+	try {
+		SquidParser sp;
+		for (;;) {
+			string comm = s.currentPath();
+				comm+= "/web/json/squid.json";
+			s.createFileText(sp.toJson(),comm);
+			sleep(3);
+		}
+		sp.~SquidParser();
+	} catch (const std::bad_alloc&) {
+		cout << "squid" << endl;
+	}
 }
 void getArpTable(){
 		try {
@@ -59,7 +68,7 @@ void getArpTable(){
 			string comm = s.currentPath();
 				comm+= "/web/json/arp.json";
 			s.createFileText(netStats.getArpTable(),comm);
-			sleep(1);
+			sleep(10);
 		}
 		netStats.~NetStats();
 	} catch (const std::bad_alloc&) {
@@ -73,7 +82,7 @@ void getNetStats(){
 			string comm = s.currentPath();
 				comm+= "/web/json/iface.json";
 			s.createFileText(netStats.getIfaces(), comm);
-			sleep(1);
+			sleep(10);
 		}
 	} catch (const std::bad_alloc&) {
 		cout << "getNetStats" << endl;
@@ -90,18 +99,13 @@ void initHttpServer(){
 		cout << "initHttpServer" << endl;
 	}	
 }
-
 void getStats(){
-	//Esta função com o decorrer do tempo está dando bad_alloc
-	//Deve ser por causa das gambiarras que foram feitas pra gerar
-	//o arquivo json, ou está estourando o tamanho maximo para alguma
-	//variavel
 	try {
 		for (;;) {
 			string comm = s.currentPath();
 				comm+= "/web/json/config.json";
 			s.createFileText(g.getAll(), comm);
-			sleep(1);
+			sleep(3);
 		}
 	} catch (const std::bad_alloc& e) {
 		cout << e.what() << endl;
@@ -127,15 +131,16 @@ void getFileSystemInfo(){
 				sleep(1);
 			} catch (const std::bad_alloc& e) {
 				cout << e.what() << endl;
-			}		 
-		db.close();
+			}		
+			SendData s;
+			cout << s.getLastId("disk", "id", &db) << endl;
+			db.close();
 		} catch (const std::bad_alloc&) {
 			cout << "getDiskStats" << endl;
 		}
 		sleep(1);
 	}
 }
-
 void serverSocket(){
 	std::cout << "running....\n";
 	try {
@@ -146,19 +151,23 @@ void serverSocket(){
 			server.accept (new_sock);
 			try {
 				while (true){
-					
 					std::string data;
 					new_sock >> data;
 					cout << data << endl;
-					data = "HTTP/1.1 200 OK\r\n";
-					//data+= "Content-Type: application/json\r\n";
-					data+= "Connection: close\r\n\r\n";
-						 //data+=netStats.getArpTable();
+					if (data.find("HTTP")) {
+						cout << "browser" << endl;
+						data = "HTTP/1.1 200 OK\r\n";
+						data+= "Content-Type: application/json\r\n";
+						data+= "Connection: close\r\n\r\n";
+						//este break é utilizado para que os navegadores não fiquem
+						//aguardando o fim do cabeçalho
+						data+= netStats.getArpTable().c_str();
+						new_sock << data;
+						break;
+					}
 					cout << netStats.getArpTable() << endl;
 					data = netStats.getArpTable().c_str();
 					new_sock << data;
-					
-					break;
 				}
 			}
 			catch (SocketException&) {}

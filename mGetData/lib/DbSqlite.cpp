@@ -19,12 +19,12 @@ DbSqlite::DbSqlite(){
 DbSqlite::DbSqlite(const DbSqlite& orig){
 }
 
-void DbSqlite::remove(char* sql){
+void DbSqlite::remove(const char* sql){
 	rc = sqlite3_exec(db, sql, callback, (void*) data, &errMsg);
 	(rc != SQLITE_OK) ? cout << errMsg : cout << "";
 }
 
-void DbSqlite::open(char *database){
+void DbSqlite::open(const char *database){
 	rc = sqlite3_open(database, &db);
 	(rc) ? cout << "Cant open Database" << endl : cout << "";
 }
@@ -38,19 +38,42 @@ void DbSqlite::insert(const char* sql){
 	}
 }
 
-void DbSqlite::selectAll(char* sql){
+void DbSqlite::selectAll(const char* sql){
 	rc = sqlite3_exec(db, sql, callback, (void*)data, &errMsg);
 	(rc != SQLITE_OK) ? cout << errMsg : cout << "";
 }
 
-void DbSqlite::update(char* sql){
+void DbSqlite::update(const char* sql){
 	rc = sqlite3_exec(db, sql, callback, (void*) data, &errMsg);
 	(rc != SQLITE_OK) ? cout << errMsg : cout << "";
 }
 
-void DbSqlite::query(char* sql){
+void DbSqlite::query(const char* sql){
+	sqlite3_stmt *stmt;
 	rc = sqlite3_exec(db, sql, callback, (void*) data, &errMsg);
 	(rc != SQLITE_OK) ? cout << errMsg : cout << "";
+	while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+		for (int i = 0; i <= sqlite3_column_count(stmt) - 1; i++) {
+			cout << sqlite3_column_text(stmt, i) << endl;
+		}
+	}
+}
+
+vector<string> DbSqlite::getByName(const char* sql, string name)
+{
+	sqlite3_stmt *stmt;
+	rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
+	(rc != SQLITE_OK) ? cout << errMsg : cout << "ok" << endl;
+	vector<string> id;
+	while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+		for (int i = 0; i <= sqlite3_column_count(stmt) - 1; i++) {
+			if (strcmp(sqlite3_column_name(stmt, i), name.c_str()) == 0) {
+				string v((char *) sqlite3_column_text(stmt, i));
+				id.push_back(v);
+			}
+		}
+	}
+	return id;
 }
 
 void DbSqlite::close()

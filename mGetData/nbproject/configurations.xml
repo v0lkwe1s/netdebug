@@ -8,7 +8,9 @@
       <itemPath>lib/DiskStats.h</itemPath>
       <itemPath>modules/GetSystemConfiguration.h</itemPath>
       <itemPath>lib/NetStats.h</itemPath>
+      <itemPath>modules/replicador/SendData.h</itemPath>
       <itemPath>lib/Serial.h</itemPath>
+      <itemPath>modules/SquidParser.h</itemPath>
     </logicalFolder>
     <logicalFolder name="lib" displayName="lib" projectFiles="true">
       <itemPath>lib/Str.cpp</itemPath>
@@ -19,6 +21,13 @@
                    projectFiles="true">
       <logicalFolder name="Database" displayName="Database" projectFiles="true">
         <itemPath>Database/db</itemPath>
+      </logicalFolder>
+      <logicalFolder name="socket" displayName="socket" projectFiles="true">
+        <itemPath>lib/ServerSocket.cpp</itemPath>
+        <itemPath>lib/ServerSocket.h</itemPath>
+        <itemPath>lib/Socket.cpp</itemPath>
+        <itemPath>lib/Socket.h</itemPath>
+        <itemPath>lib/SocketException.h</itemPath>
       </logicalFolder>
       <logicalFolder name="web" displayName="web" projectFiles="true">
         <logicalFolder name="app" displayName="app" projectFiles="true">
@@ -81,7 +90,9 @@
       <itemPath>lib/DiskStats.cpp</itemPath>
       <itemPath>modules/GetSystemConfiguration.cpp</itemPath>
       <itemPath>lib/NetStats.cpp</itemPath>
+      <itemPath>modules/replicador/SendData.cpp</itemPath>
       <itemPath>lib/Serial.cpp</itemPath>
+      <itemPath>modules/SquidParser.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -101,6 +112,7 @@
     <Elem>lib</Elem>
     <Elem>web</Elem>
     <Elem>Database</Elem>
+    <Elem>modules/socket</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -9795,6 +9807,16 @@
       </item>
       <item path="lib/Serial.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="lib/ServerSocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/ServerSocket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/Socket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/Socket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/SocketException.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="lib/Str.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="lib/Str.h" ex="false" tool="3" flavor2="0">
@@ -9804,6 +9826,14 @@
       <item path="modules/GetSystemConfiguration.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="modules/GetSystemConfiguration.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/SquidParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/SquidParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/replicador/SendData.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/replicador/SendData.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="web/app/app.js" ex="false" tool="3" flavor2="0">
       </item>
@@ -9953,6 +9983,16 @@
       </item>
       <item path="lib/Serial.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="lib/ServerSocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/ServerSocket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/Socket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/Socket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/SocketException.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="lib/Str.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="lib/Str.h" ex="false" tool="3" flavor2="0">
@@ -9962,6 +10002,14 @@
       <item path="modules/GetSystemConfiguration.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="modules/GetSystemConfiguration.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/SquidParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/SquidParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/replicador/SendData.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/replicador/SendData.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="web/app/app.js" ex="false" tool="3" flavor2="0">
       </item>

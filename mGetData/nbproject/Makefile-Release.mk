@@ -39,9 +39,13 @@ OBJECTFILES= \
 	${OBJECTDIR}/lib/DiskStats.o \
 	${OBJECTDIR}/lib/NetStats.o \
 	${OBJECTDIR}/lib/Serial.o \
+	${OBJECTDIR}/lib/ServerSocket.o \
+	${OBJECTDIR}/lib/Socket.o \
 	${OBJECTDIR}/lib/Str.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/modules/GetSystemConfiguration.o
+	${OBJECTDIR}/modules/GetSystemConfiguration.o \
+	${OBJECTDIR}/modules/SquidParser.o \
+	${OBJECTDIR}/modules/replicador/SendData.o
 
 
 # C Compiler Flags
@@ -88,6 +92,16 @@ ${OBJECTDIR}/lib/Serial.o: lib/Serial.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/Serial.o lib/Serial.cpp
 
+${OBJECTDIR}/lib/ServerSocket.o: lib/ServerSocket.cpp 
+	${MKDIR} -p ${OBJECTDIR}/lib
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/ServerSocket.o lib/ServerSocket.cpp
+
+${OBJECTDIR}/lib/Socket.o: lib/Socket.cpp 
+	${MKDIR} -p ${OBJECTDIR}/lib
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/Socket.o lib/Socket.cpp
+
 ${OBJECTDIR}/lib/Str.o: lib/Str.cpp 
 	${MKDIR} -p ${OBJECTDIR}/lib
 	${RM} "$@.d"
@@ -102,6 +116,16 @@ ${OBJECTDIR}/modules/GetSystemConfiguration.o: modules/GetSystemConfiguration.cp
 	${MKDIR} -p ${OBJECTDIR}/modules
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/GetSystemConfiguration.o modules/GetSystemConfiguration.cpp
+
+${OBJECTDIR}/modules/SquidParser.o: modules/SquidParser.cpp 
+	${MKDIR} -p ${OBJECTDIR}/modules
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/SquidParser.o modules/SquidParser.cpp
+
+${OBJECTDIR}/modules/replicador/SendData.o: modules/replicador/SendData.cpp 
+	${MKDIR} -p ${OBJECTDIR}/modules/replicador
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/replicador/SendData.o modules/replicador/SendData.cpp
 
 # Subprojects
 .build-subprojects:

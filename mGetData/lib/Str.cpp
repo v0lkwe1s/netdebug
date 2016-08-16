@@ -46,13 +46,13 @@ string Str::subString(string t, string s) {
 string Str::getFileText(string file) {
 	string line;
 	string text;
-        ifstream myfile(file.c_str());
+    ifstream myfile(file.c_str());
 	if (myfile.is_open()) {
             while (!myfile.eof()) {
                 getline(myfile, line);
                 text+= line;
             }
-            myfile.close();
+        myfile.close();
 	} else text = "Err";
 	return text;
 }
@@ -60,7 +60,6 @@ string Str::getFileText(string file) {
 string Str::currentPath(){
 	char cwd[1024];
 	string path = getcwd(cwd, sizeof(cwd));
-	//return replace(path, "mGetData", "");
 	return path;
 }
 

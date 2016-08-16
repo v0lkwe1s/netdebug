@@ -29,11 +29,11 @@ NetStats::~NetStats()
 // um nud ficando o comando -> ip neighbour show nud reachable
 string NetStats::getArpTable()
 {
-	string comm = "ip neighbour show | awk 'NR>1 {print "
+	string comm = "ip neighbour show | awk '{print "
 		 "\"{\\"
 		 "\"host\\""\": \\""\"\" $1 \"""\\""""\","
 		 "\\""\"mac\\""\": \\""\"\" $5 \"""\\""""\","
-		 "\\""\"iface\\""\": \\""\"\" $3 \"""\\""""\""
+		 "\\""\"iface\\""\": \\""\"\" $3 \"""\\""""\","
 		 "\\""\"state\\""\": \\""\"\" $6 \"""\\""""\""
 		 "},\"""}'";
 

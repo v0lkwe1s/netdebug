@@ -1,66 +1,168 @@
-<div class="load">Host {{ hostInfo.Host.hostname }}</div>
-<div class="load">CPU {{ hostInfo.Load.cpu | number:2 }} %</div>
-<table class="table">
-	<thead>
-		<th> filesystem</th>
-		<th> Size</th>
-		<th> used</th>
-		<th> available</th>
-		<th> mounted</th>
-	</thead>
-	<tbody>
-		<tr ng-repeat="disk in DiskInfo.disk" >
-			<td >{{ disk.fs }} </td>
-			<td >{{ disk.size }} </td>
-			<td >{{ disk.used }} </td>
-			<td >{{ disk.available }} </td>
-			<td >{{ disk.mounted }} </td>
-			
-		</tr>
-	</tbody>
-</table>
+<div class="panel panel-default">
+  <div class="panel-heading">Server Info</div>
+  <div class="panel-body">
+		<div class="row">
+			<div class="col-md-6">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Spec</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Host</td>
+							<td>{{ hostInfo.Host.hostname }}</td>
+						</tr>
+						<tr>
+							<td>Kernel Version</td>
+							<td>{{ hostInfo.Host.kernel }}</td>
+						</tr>
+						<tr>
+							<td>Ram Total<br>Swap Total</td>
+							<td>{{ hostInfo.Memory.totalRam }} MB<br>{{ hostInfo.Memory.totalSwap }} MB</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Cpu</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Model Name</td>
+							<td>{{ hostInfo.cpuInfo['Model name'] }}</td>
+						</tr>
+						<tr>
+							<td>Architecture</td>
+							<td>{{ hostInfo.cpuInfo['Architecture'] }}</td>
+						</tr>
+						<tr>
+							<td>Core's (Core + Threads)</td>
+							<td>{{ hostInfo.cpuInfo['CPU(s)'] }}</td>
+						</tr>
+						<tr>
+							<td>BogoMIPS</td>
+							<td>{{ hostInfo.cpuInfo['BogoMIPS'] }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+  </div>
+</div>
 
-<table class="table">
-	<thead>
-		<th> iface</th>
-		<th> MTU</th>
-		<th> RX-OK</th>
-		<th> RX-ERR</th>
-		<th> RX-DRP</th>
-		<th> RX-OVR</th>
-		<th> TX-OK </th>
-		<th> TX-ERR</th>
-		<th> TX-DRP</th>
-		<th> TX-OVR</th>
-	</thead>
-	<tbody>
-		<tr ng-repeat="iface in InetIface.interfaces" >
-			<td >{{ iface['iface'] }} </td>
-			<td >{{ iface['MTU'] }} </td>
-			<td >{{ iface['RX-OK'] }} </td>
-			<td >{{ iface['RX-ERR'] }} </td>
-			<td >{{ iface['RX-DRP'] }} </td>
-			<td >{{ iface['RX-OVR'] }} </td>
-			<td >{{ iface['TX-OK'] }} </td>
-			<td >{{ iface['TX-ERR'] }} </td>
-			<td >{{ iface['TX-DRP'] }} </td>
-			<td >{{ iface['TX-OVR'] }} </td>
-		</tr>
-	</tbody>
-</table>
+<div class="panel panel-default">
+  <div class="panel-heading">Arp</div>
+  <div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="load">CPU {{ hostInfo.Load.cpu | number:2 }} %</div>
+				<div class="load">Ram in use {{ hostInfo.Memory.totalRam - hostInfo.Memory.freeRam }} MB </div>
+				<div class="load">Swap in use {{ hostInfo.Memory.totalSwap - hostInfo.Memory.freeSwap }} MB </div>
+			</div>
+		</div>
+	</div>
+</div>
 
-<table class="table">
-	<thead>
-		<th> Host</th>
-		<th> Mac</th>
-		<th> iface</th>
+<div class="panel panel-default">
+  <div class="panel-heading">Arp</div>
+  <div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<th> Host</th>
+						<th> Mac</th>
+						<th> iface</th>
 
-	</thead>
-	<tbody>
-		<tr ng-repeat="arp in InetArp.arp" >
-			<td >{{ arp['host'] }} </td>
-			<td >{{ arp['mac'] }} </td>
-			<td >{{ arp['iface'] }} </td>
-		</tr>
-	</tbody>
-</table>
+					</thead>
+					<tbody>
+						<tr ng-repeat="arp in InetArp.arp" >
+							<td >{{ arp['host'] }} </td>
+							<td >{{ arp['mac'] }} </td>
+							<td >{{ arp['iface'] }} </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">Net Stats</div>
+  <div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<th> iface</th>
+						<th> MTU</th>
+						<th> RX-OK</th>
+						<th> RX-ERR</th>
+						<th> RX-DRP</th>
+						<th> RX-OVR</th>
+						<th> TX-OK </th>
+						<th> TX-ERR</th>
+						<th> TX-DRP</th>
+						<th> TX-OVR</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="iface in InetIface.interfaces" >
+							<td >{{ iface['iface'] }} </td>
+							<td >{{ iface['MTU'] }} </td>
+							<td >{{ iface['RX-OK'] }} </td>
+							<td >{{ iface['RX-ERR'] }} </td>
+							<td >{{ iface['RX-DRP'] }} </td>
+							<td >{{ iface['RX-OVR'] }} </td>
+							<td >{{ iface['TX-OK'] }} </td>
+							<td >{{ iface['TX-ERR'] }} </td>
+							<td >{{ iface['TX-DRP'] }} </td>
+							<td >{{ iface['TX-OVR'] }} </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">FileSystems</div>
+  <div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<th> filesystem</th>
+						<th> Size</th>
+						<th> used</th>
+						<th> Free</th>
+						<th> Used % </th>
+						<th> mount point</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="disk in DiskInfo.disk" >
+							<td >{{ disk.fs }} </td>
+							<td >{{ disk.size }} </td>
+							<td >{{ disk.used }} </td>
+							<td >{{ disk.available }} </td>
+							<td >{{ disk['used%']}} </td>
+							<td >{{ disk.mounted }} </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
