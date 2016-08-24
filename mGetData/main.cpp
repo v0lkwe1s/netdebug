@@ -6,6 +6,8 @@
 #include <thread>
 #include <stdio.h>
 #include <stdlib.h>
+#include <c++/4.9/bits/stl_bvector.h>
+#include <c++/4.9/bits/stringfwd.h>
 #include "lib/SocketException.h"
 #include "lib/ServerSocket.h"
 #include "modules/replicador/SendData.h"
@@ -26,22 +28,43 @@ void proxy();
 
 int main(int argc, char** argv) {
 
-	thread server(serverSocket);
-	thread serverHttp(initHttpServer);
-	thread system (getStats);
-	thread net (getNetStats);
-	thread arp (getArpTable);
-	//thread disk (getFileSystemInfo);
-	thread squidProxy (proxy);
-	unsigned long int i =0;
+	
+	
+//	thread server(serverSocket);
+//	thread serverHttp(initHttpServer);
+//	thread system (getStats);
+//	thread net (getNetStats);
+//	thread arp (getArpTable);
+//	thread disk (getFileSystemInfo);
+//	thread squidProxy (proxy);
+	unsigned long int x =0;
 	
 	for (;;){
-		cout << i++ << endl;
+	//	cout << i++ << endl;
+		
+	DbSqlite db;
+	db.open("Database/netdebug.db");
+	SendData sd;
+	vector<GenericClass*> disk;
+	string sql = "select * from disk";
+	disk = sd.getFromDb(db, sql.c_str());
+//	cout << disk.size() << endl;
+//		for (int i = 0; i < disk.size(); i++) {
+//			usleep(1000);
+//			cout << "ID " << disk[i]->GetId() << " Date";
+//			cout << disk[i]->GetDate() << " Json";
+//			cout << disk[i]->GetJson();
+//			cout << x++ << "  --  " << disk.size() << endl;
+//		}
+	sd.~SendData();
+	db.~DbSqlite();
+		
+		
 //		cout << "Node Server - " << server.get_id() << endl;
 //		cout << "Net Stats   - " << net.get_id() << endl;
 //		cout << "Disk Stats  - " << disk.get_id() << endl;
 //		cout << "Arp Table   - " << arp.get_id() << endl;
-		cout << "squid       - " << squidProxy.get_id() << endl;
+//		cout << "squid       - " << squidProxy.get_id() << endl;
 //		cout << "All Stats   - " << system.get_id() << endl;
 		sleep(1);
 	}
@@ -116,7 +139,7 @@ void getFileSystemInfo(){
 	for (;;) {
 		try {
 			DbSqlite db;
-			db.open("Database/db");
+			db.open("Database/netdebug.db");
 			string comm = s.currentPath();
 				comm+= "/web/json/disk.json";
 			s.createFileText(ds.getFileSystems(), comm);
@@ -133,7 +156,6 @@ void getFileSystemInfo(){
 				cout << e.what() << endl;
 			}		
 			SendData s;
-			cout << s.getLastId("disk", "id", &db) << endl;
 			db.close();
 		} catch (const std::bad_alloc&) {
 			cout << "getDiskStats" << endl;

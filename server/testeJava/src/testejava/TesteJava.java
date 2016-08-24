@@ -25,12 +25,12 @@ public class TesteJava {
             String modifiedSentence;
             BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 
-            Socket clientSocket = new Socket("192.168.1.11", 30000);
+            Socket clientSocket = new Socket("127.0.0.1", 1234);
             DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            DataInputStream inFromServer = new DataInputStream(clientSocket.getInputStream());
 
             //sentence = inFromUser.readLine();
-            outToServer.writeBytes(" \n");
+            outToServer.writeBytes("teste cliente \n");
             modifiedSentence = inFromServer.readLine();
             
             System.out.println(i + " - " + modifiedSentence);

@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>lib/DbSqlite.h</itemPath>
       <itemPath>lib/DiskStats.h</itemPath>
+      <itemPath>lib/GenericClass.h</itemPath>
       <itemPath>modules/GetSystemConfiguration.h</itemPath>
       <itemPath>lib/NetStats.h</itemPath>
       <itemPath>modules/replicador/SendData.h</itemPath>
@@ -23,6 +24,8 @@
         <itemPath>Database/db</itemPath>
       </logicalFolder>
       <logicalFolder name="socket" displayName="socket" projectFiles="true">
+        <itemPath>modules/socket/ClientSocket.cpp</itemPath>
+        <itemPath>modules/socket/ClientSocket.h</itemPath>
         <itemPath>lib/ServerSocket.cpp</itemPath>
         <itemPath>lib/ServerSocket.h</itemPath>
         <itemPath>lib/Socket.cpp</itemPath>
@@ -9799,6 +9802,8 @@
       </item>
       <item path="lib/DiskStats.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="lib/GenericClass.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="lib/NetStats.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="lib/NetStats.h" ex="false" tool="3" flavor2="0">
@@ -9834,6 +9839,10 @@
       <item path="modules/replicador/SendData.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="modules/replicador/SendData.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/socket/ClientSocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/socket/ClientSocket.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="web/app/app.js" ex="false" tool="3" flavor2="0">
       </item>
@@ -9975,6 +9984,8 @@
       </item>
       <item path="lib/DiskStats.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="lib/GenericClass.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="lib/NetStats.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="lib/NetStats.h" ex="false" tool="3" flavor2="0">
@@ -10010,6 +10021,10 @@
       <item path="modules/replicador/SendData.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="modules/replicador/SendData.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/socket/ClientSocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/socket/ClientSocket.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="web/app/app.js" ex="false" tool="3" flavor2="0">
       </item>

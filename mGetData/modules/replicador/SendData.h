@@ -17,20 +17,19 @@
 #include "../../lib/Str.h"
 #include "../../lib/DbSqlite.h"
 
+
+
 class SendData {
 public:
   SendData();
   SendData(const SendData& orig);
   virtual ~SendData();
-  int getLastId(string table, string collumn, DbSqlite *ds){
-    string sql = ("select " + collumn + " from " + table + " where " + collumn + " = (select max(" + collumn + ") from " + table + ");");
-    vector<string> id = ds->getByName(sql.c_str(), "id");
-    string g = (id[id.size()-1]);
-    int setId = atoi(g.c_str());
-    return setId;
-  }
+  vector<GenericClass*> getFromDb(DbSqlite &db, const char* sql);
+  
+  
 private:
   Str s;
+
   //pega o ultimo id da tabela
   
 

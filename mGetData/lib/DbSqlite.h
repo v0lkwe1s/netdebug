@@ -20,6 +20,7 @@
 #include <stdio.h>
 
 #include "Str.h"
+#include "GenericClass.h"
 
 
 class DbSqlite {
@@ -40,16 +41,33 @@ public:
   
   void remove(const char *sql);
   
-  void query(const char *sql);
+  vector<string*> query(const char* sql);
+  
+  vector<GenericClass*> getContent(const char *sql){
+    vector<GenericClass*> result;
+    rc = sqlite3_exec(db, sql, classCallBack, &result, &errMsg);
+    (rc != SQLITE_OK) ? cout << errMsg : cout << "";
+    return result;
+  }
   
   void close();
   
 private:
+  
+  static int classCallBack(void *v, int argc, char **argv, char **ColName){
+    vector<GenericClass*>* result = (vector<GenericClass*>*) v;
+    GenericClass *c = new GenericClass();
+    c->SetId(atoi(argv[0]));
+    c->SetDate(argv[1]);
+    c->SetJson(argv[2]);
+    result->push_back(c);
+    return 0;
+  }
   sqlite3 *db;
-
   char *errMsg =0;
   int rc;
   Str s;
+  
   const char* data = "Callback function called";
   static int callback(void *NotUsed, int argc, char **argv, char **azColName){
     int i;

@@ -35,6 +35,17 @@ void Str::split(const string& s, char c, vector<string>& v) {
     }
 }
 
+vector<string> split(string str, char delimiter) {
+	vector<string> internal;
+	stringstream ss(str); // Turn the string into a stream.
+	string tok;
+
+	while(getline(ss, tok, delimiter)) {
+	  internal.push_back(tok);
+	}
+	return internal;
+}
+
 string Str::subString(string t, string s) {
     std::string::size_type i = t.find(s);
     if (i != std::string::npos)
@@ -80,8 +91,8 @@ string Str::getLine(string file) {
 string Str::numberToStr(double n) {
     stringstream ss;
 	ss << n;
-	string str = ss.str();
-	return str;
+	//string str = ;
+	return ss.str();
 }
 
 void Str::createFileText(string text, string file){

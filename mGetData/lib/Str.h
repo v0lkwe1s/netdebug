@@ -34,6 +34,7 @@ public:
     virtual ~Str();
     
     void split(const string& s, char c, vector<string>& v);
+    vector<string> split(string str, char delimiter);
     string numberToStr(double n);
     string getFileText(string file);
     string subString(string t, string s);

@@ -45,7 +45,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/modules/GetSystemConfiguration.o \
 	${OBJECTDIR}/modules/SquidParser.o \
-	${OBJECTDIR}/modules/replicador/SendData.o
+	${OBJECTDIR}/modules/replicador/SendData.o \
+	${OBJECTDIR}/modules/socket/ClientSocket.o
 
 
 # C Compiler Flags
@@ -126,6 +127,11 @@ ${OBJECTDIR}/modules/replicador/SendData.o: modules/replicador/SendData.cpp
 	${MKDIR} -p ${OBJECTDIR}/modules/replicador
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/replicador/SendData.o modules/replicador/SendData.cpp
+
+${OBJECTDIR}/modules/socket/ClientSocket.o: modules/socket/ClientSocket.cpp 
+	${MKDIR} -p ${OBJECTDIR}/modules/socket
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/socket/ClientSocket.o modules/socket/ClientSocket.cpp
 
 # Subprojects
 .build-subprojects:
