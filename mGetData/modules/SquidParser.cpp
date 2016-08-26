@@ -23,6 +23,8 @@ SquidParser::SquidParser(const SquidParser& orig)
 
 string SquidParser::toJson()
 {
+	string json = "{\"proxy\":[";
+	try {
 	string comm = "tail -200 /var/log/squid3/access.log | awk -F \" \" '{print "
 		 "\"{\\"
 		 "\"dateTime\\""\": \\""\"\" $1 \"""\\""""\","
@@ -36,7 +38,6 @@ string SquidParser::toJson()
 		 "\\""\"route\\""\": \\""\"\" $9 \"""\\""""\"," //The proxy hierarchy route
 		 "\\""\"contentType\\""\": \\""\"\" $10 \"""\\""""\"" //The proxy response content type
 		 "},\"""}'";
-	cout << comm << endl;
 	FILE *in;
 	char buff[512];
 	in = popen(comm.c_str(), "r");
@@ -50,8 +51,11 @@ string SquidParser::toJson()
 	//json = s.replace(json, "\n\0", " ");
 	//Adiciona quebra de linha no final do arquivo, que é para o cliente socket
 	// saber que terminou a string
+	
+	} catch (exception& e){
+		cout << "exception" << endl;
+	}
 	json += "]}\n\0";
-	cout << json << endl;
 	return json;
 }
 

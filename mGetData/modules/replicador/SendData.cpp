@@ -21,49 +21,39 @@ SendData::SendData(){
 
 vector<GenericClass*> SendData::getFromDb(DbSqlite& db, const char* sql){
 	string replaceSql = "";
-	try {
-		ClientSocket client_socket ( "192.168.1.8", 58666 );
-		std::string reply;
-		try {
-			client_socket << "get|disk|lastId\n";
-			client_socket >> reply;
-			cout << reply << endl;
-			replaceSql = "select * from disk where id > " + reply + "; ";
-		}  catch ( SocketException& ) {}
-			cout << reply << endl;
-		}	catch ( SocketException& e )	{
-			std::cout << "Exception was caught:" << e.description() << "\n";
-		}
-	((replaceSql == "") ? replaceSql = sql : replaceSql = replaceSql);
 	string data = "";
 	vector<GenericClass*> _class;
-	_class = db.getContent(replaceSql.c_str());
-	if (replaceSql != ""){
 	try {
 		ClientSocket client_socket ( "localhost", 58666 );
-		if (client_socket.is_valid()) {
-			for (int i = 0; i < _class.size(); i++) {
-				data += _class[i]->GetJson(); 
-				data[(strlen(data.c_str()) - 1)] = ' ';
-				data += ",\"host\" :[";
-				data += "{\"id\" : " + s.numberToStr(_class[i]->GetId()) + ",";
-				data += "\"date\" :\"" + _class[i]->GetDate() + "\",";
-				data += "\"hostname\" : \"hostname\"}]};";
-			}
-			data = s.replace(data,"\n\0"," ");
-			data+="\n";
-			cout << data << endl;
-		}
 		std::string reply;
-		try {
-			client_socket << data;
+		if (client_socket.is_valid()) {
+			client_socket << "get;disk;lastId\n";
 			client_socket >> reply;
-		}  catch ( SocketException& ) {}
-			cout << reply << endl;
-		}	catch ( SocketException& e )	{
-			std::cout << "Exception was caught:" << e.description() << "\n";
+			replaceSql = "select * from disk where id > " + reply + "limit 50;";
+			replaceSql = s.replace(replaceSql,"\n\0"," ");
+			//((replaceSql == "") ? replaceSql = sql : replaceSql = replaceSql);
+			_class = db.getContent(replaceSql.c_str());
+			if (_class.size() == 0) {
+				client_socket << "done";
+			} else {
+				for (int i = 0; i < _class.size(); i++) {
+					data += _class[i]->GetJson(); 
+					data[(strlen(data.c_str()) - 1)] = ' ';
+					data += ",\"host\" :[";
+					data += "{\"id\" : " + s.numberToStr(_class[i]->GetId()) + ",";
+					data += "\"date\" :\"" + _class[i]->GetDate() + "\",";
+					data += "\"hostname\" : \"hostname\"}]};";
+				}
+				data = s.replace(data,"\n\0"," ");
+				data+="\n";
+				client_socket << data;
+				client_socket >> reply;
+			}
 		}
+	} catch ( SocketException& e )	{
+		std::cout << e.description() << "\n";
 	}
+
 	return _class;
 }
 

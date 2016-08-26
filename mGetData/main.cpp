@@ -27,46 +27,23 @@ void serverSocket();
 void proxy();
 
 int main(int argc, char** argv) {
-
-	
-	
-//	thread server(serverSocket);
-//	thread serverHttp(initHttpServer);
-//	thread system (getStats);
-//	thread net (getNetStats);
-//	thread arp (getArpTable);
-//	thread disk (getFileSystemInfo);
-//	thread squidProxy (proxy);
+	thread server(serverSocket);
+	thread serverHttp(initHttpServer);
+	thread system (getStats);
+	thread net (getNetStats);
+	thread arp (getArpTable);
+	thread disk (getFileSystemInfo);
+	thread squidProxy (proxy);
 	unsigned long int x =0;
 	
 	for (;;){
-	//	cout << i++ << endl;
-		
-	DbSqlite db;
-	db.open("Database/netdebug.db");
-	SendData sd;
-	vector<GenericClass*> disk;
-	string sql = "select * from disk";
-	disk = sd.getFromDb(db, sql.c_str());
-//	cout << disk.size() << endl;
-//		for (int i = 0; i < disk.size(); i++) {
-//			usleep(1000);
-//			cout << "ID " << disk[i]->GetId() << " Date";
-//			cout << disk[i]->GetDate() << " Json";
-//			cout << disk[i]->GetJson();
-//			cout << x++ << "  --  " << disk.size() << endl;
-//		}
-	sd.~SendData();
-	db.~DbSqlite();
-		
-		
-//		cout << "Node Server - " << server.get_id() << endl;
-//		cout << "Net Stats   - " << net.get_id() << endl;
-//		cout << "Disk Stats  - " << disk.get_id() << endl;
-//		cout << "Arp Table   - " << arp.get_id() << endl;
-//		cout << "squid       - " << squidProxy.get_id() << endl;
-//		cout << "All Stats   - " << system.get_id() << endl;
-		sleep(1);
+		cout << "Node Server - " << server.get_id() << endl;
+		cout << "Net Stats   - " << net.get_id() << endl;
+		cout << "Disk Stats  - " << disk.get_id() << endl;
+		cout << "Arp Table   - " << arp.get_id() << endl;
+		cout << "squid       - " << squidProxy.get_id() << endl;
+		cout << "All Stats   - " << system.get_id() << endl;
+	sleep(30);
 	}
     return 0;
 }
@@ -80,8 +57,8 @@ void proxy(){
 			sleep(3);
 		}
 		sp.~SquidParser();
-	} catch (const std::bad_alloc&) {
-		cout << "squid" << endl;
+	} catch (exception& e) {
+		cout << e.what() << endl;
 	}
 }
 void getArpTable(){
@@ -137,6 +114,7 @@ void getStats(){
 void getFileSystemInfo(){
 	DiskStats ds; 
 	for (;;) {
+		sleep(2);
 		try {
 			DbSqlite db;
 			db.open("Database/netdebug.db");
@@ -155,12 +133,15 @@ void getFileSystemInfo(){
 			} catch (const std::bad_alloc& e) {
 				cout << e.what() << endl;
 			}		
-			SendData s;
-			db.close();
-		} catch (const std::bad_alloc&) {
-			cout << "getDiskStats" << endl;
+			SendData sd;
+			vector<GenericClass*> disk;
+			string sql = "select * from disk";
+			disk = sd.getFromDb(db, sql.c_str());
+			sd.~SendData();
+			db.~DbSqlite();
+		} catch (exception& e) {
+			cout << e.what() << endl;
 		}
-		sleep(1);
 	}
 }
 void serverSocket(){
