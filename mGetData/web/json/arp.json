@@ -1,1 +1,0 @@
-{"arp":[{"host": "192.168.1.1","mac": "00:0e:f4:1f:cb:d8","iface": "eth0","state": "REACHABLE"}, {"host": "192.168.1.12","mac": "3c:77:e6:8c:ce:0f","iface": "eth0","state": "STALE"}  ]}
