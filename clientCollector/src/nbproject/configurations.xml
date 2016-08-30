@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="lib" displayName="lib" projectFiles="true">
+      <logicalFolder name="database" displayName="database" projectFiles="true">
+        <itemPath>lib/database/DbSqlite.cpp</itemPath>
+        <itemPath>lib/database/DbSqlite.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="model" displayName="model" projectFiles="true">
+        <itemPath>lib/model/GenericClass.h</itemPath>
+        <itemPath>lib/model/This.cpp</itemPath>
+        <itemPath>lib/model/This.h</itemPath>
+      </logicalFolder>
+      <itemPath>lib/Serial.cpp</itemPath>
+      <itemPath>lib/Serial.h</itemPath>
+      <itemPath>lib/Str.cpp</itemPath>
+      <itemPath>lib/Str.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="modules" displayName="modules" projectFiles="true">
+      <logicalFolder name="collector" displayName="collector" projectFiles="true">
+        <itemPath>modules/collector/DiskStats.cpp</itemPath>
+        <itemPath>modules/collector/DiskStats.h</itemPath>
+        <itemPath>modules/collector/GetSystemConfiguration.cpp</itemPath>
+        <itemPath>modules/collector/GetSystemConfiguration.h</itemPath>
+        <itemPath>modules/collector/NetStats.cpp</itemPath>
+        <itemPath>modules/collector/NetStats.h</itemPath>
+        <itemPath>modules/collector/SquidParser.cpp</itemPath>
+        <itemPath>modules/collector/SquidParser.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="replicador" displayName="replicador" projectFiles="true">
+        <itemPath>modules/replicador/SendData.cpp</itemPath>
+        <itemPath>modules/replicador/SendData.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="socket" displayName="socket" projectFiles="true">
+        <itemPath>modules/socket/ClientSocket.cpp</itemPath>
+        <itemPath>modules/socket/ClientSocket.h</itemPath>
+        <itemPath>modules/socket/ServerSocket.cpp</itemPath>
+        <itemPath>modules/socket/ServerSocket.h</itemPath>
+        <itemPath>modules/socket/Socket.cpp</itemPath>
+        <itemPath>modules/socket/Socket.h</itemPath>
+        <itemPath>modules/socket/SocketException.h</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>Netdebug.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>../Database</itemPath>
+      <itemPath>Makefile</itemPath>
+      <itemPath>../doc</itemPath>
+      <itemPath>../man</itemPath>
+      <itemPath>../web</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>modules</Elem>
+    <Elem>lib</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <commandLine>-lpthread --std=c++11 -lsqlite3</commandLine>
+        </ccTool>
+      </compileType>
+      <item path="Netdebug.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/Serial.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/Serial.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/Str.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/Str.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/database/DbSqlite.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/database/DbSqlite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/model/GenericClass.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/model/This.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/model/This.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/collector/DiskStats.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/collector/DiskStats.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/collector/GetSystemConfiguration.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="modules/collector/GetSystemConfiguration.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="modules/collector/NetStats.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/collector/NetStats.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/collector/SquidParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/collector/SquidParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/replicador/SendData.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/replicador/SendData.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/socket/ClientSocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/socket/ClientSocket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/socket/ServerSocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/socket/ServerSocket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/socket/Socket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/socket/Socket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/socket/SocketException.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="Netdebug.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/Serial.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/Serial.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/Str.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/Str.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/database/DbSqlite.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/database/DbSqlite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/model/GenericClass.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lib/model/This.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lib/model/This.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/collector/DiskStats.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/collector/DiskStats.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/collector/GetSystemConfiguration.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="modules/collector/GetSystemConfiguration.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="modules/collector/NetStats.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/collector/NetStats.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/collector/SquidParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/collector/SquidParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/replicador/SendData.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/replicador/SendData.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/socket/ClientSocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/socket/ClientSocket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/socket/ServerSocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/socket/ServerSocket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/socket/Socket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/socket/Socket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/socket/SocketException.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

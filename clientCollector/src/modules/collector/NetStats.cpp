@@ -1,34 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   netStats.cpp
- * Author: williamvolkweis
- * 
- * Created on July 26, 2016, 10:35 PM
- */
-
 #include "NetStats.h"
 
-NetStats::NetStats()
-{
+NetStats::NetStats(){
 }
 
-NetStats::NetStats(const NetStats& orig)
-{
+NetStats::NetStats(const NetStats& orig){
 }
 
-NetStats::~NetStats()
-{
+NetStats::~NetStats(){
 }
 //De acordo com a documentação do arp, recomenda-se utilizar o ip neigh para verificar 
 // a tabela arp. neste caso estou trazendo todas as conexoes, mas da para filtrar adicionando
 // um nud ficando o comando -> ip neighbour show nud reachable
-string NetStats::getArpTable()
-{
+string NetStats::getArpTable(){
 	string comm = "ip neighbour show | awk '{print "
 		 "\"{\\"
 		 "\"host\\""\": \\""\"\" $1 \"""\\""""\","

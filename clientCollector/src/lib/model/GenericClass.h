@@ -1,21 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   GenericClass.h
- * Author: williamvolkweis
- *
- * Created on August 20, 2016, 7:25 PM
- */
-
 #ifndef GENERICCLASS_H
 #define GENERICCLASS_H
 
-#include "Str.h"
+using namespace std;
 
+#include "../Str.h"
 
 class GenericClass {
 public : 

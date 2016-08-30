@@ -1,17 +1,20 @@
 #include <cstdlib>
-#include "modules/GetSystemConfiguration.h"
-#include "lib/NetStats.h"
-#include "lib/DbSqlite.h"
-#include "lib/DiskStats.h"
 #include <thread>
 #include <stdio.h>
 #include <stdlib.h>
-#include <c++/4.9/bits/stl_bvector.h>
-#include <c++/4.9/bits/stringfwd.h>
-#include "lib/SocketException.h"
-#include "lib/ServerSocket.h"
+#include <unistd.h>
+#include <vector>
+
+#include "modules/collector/GetSystemConfiguration.h"
+#include "lib/Str.h"
+#include "modules/collector/SquidParser.h"
+#include "modules/collector/NetStats.h"
+#include "modules/socket/ServerSocket.h"
 #include "modules/replicador/SendData.h"
-#include "modules/SquidParser.h"
+#include "modules/collector/DiskStats.h"
+#include "lib/database/DbSqlite.h"
+#include "modules/socket/SocketException.h"
+#include "lib/model/GenericClass.h"
 
 using namespace std;
 
@@ -122,7 +125,7 @@ void getStats(){
 			SendData sd;
 			vector<GenericClass*> disk;
 			string sql = "select * from stats";
-			disk = sd.getFromDb(db, sql.c_str());
+			disk = sd.getFromDb(db, sql);
 			sd.~SendData();
 			db.~DbSqlite();
 			sleep(3);
@@ -156,7 +159,7 @@ void getFileSystemInfo(){
 			SendData sd;
 			vector<GenericClass*> disk;
 			string sql = "select * from disk";
-			disk = sd.getFromDb(db, sql.c_str());
+			disk = sd.getFromDb(db, sql);
 			sd.~SendData();
 			db.~DbSqlite();
 		} catch (exception& e) {

@@ -1,11 +1,14 @@
 #ifndef DBSQLITE_H
 #define DBSQLITE_H
 
+using namespace std;
+
 #include <sqlite3.h>
 #include <stdio.h>
+#include <vector>
 
-#include "Str.h"
-#include "GenericClass.h"
+#include "../../lib/Str.h"
+#include "../../lib/model/GenericClass.h"
 
 class DbSqlite {
 public:

@@ -1,12 +1,9 @@
 #include "SendData.h"
-#include "../socket/ClientSocket.h"
-#include "../../lib/Socket.h"
-#include "../../lib/SocketException.h"
 
 SendData::SendData(){
 }
 
-vector<GenericClass*> SendData::getFromDb(DbSqlite& db, const char* table){
+vector<GenericClass*> SendData::getFromDb(DbSqlite& db, string table){
 	string data = "";
 	string sql= "";
 	vector<GenericClass*> _class;
@@ -29,7 +26,7 @@ vector<GenericClass*> SendData::getFromDb(DbSqlite& db, const char* table){
 					data += ",\"host\" :[";
 					data += "{\"id\" : " + s.numberToStr(_class[i]->GetId()) + ",";
 					data += "\"date\" :\"" + _class[i]->GetDate() + "\",";
-					data += "\"hostname\" : \"" +  + "\"}]};";
+					data += "\"hostname\" : \" hostname \"}]};";
 				}
 				data = s.replace(data,"\n\0"," ");
 				data+="\n";
@@ -38,7 +35,7 @@ vector<GenericClass*> SendData::getFromDb(DbSqlite& db, const char* table){
 			}
 		}
 	} catch ( SocketException& e )	{
-		std::cout << e.description() << "\n";
+		cout << e.description() << "\n";
 	}
 	return _class;
 }

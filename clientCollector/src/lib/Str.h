@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+#ifndef STR_H
+#define STR_H
 
-/* 
- * File:   str.h
- * Author: williamvolkweis
- *
- * Created on March 27, 2016, 7:02 PM
- */
+using namespace std;
+
 #include <stdio.h>
 #include <vector>
 #include <string.h>
@@ -21,11 +14,6 @@
 #include <string>
 #include <limits.h>
 #include <unistd.h>
-
-using namespace std;
-
-#ifndef STR_H
-#define STR_H
 
 class Str {
 public:

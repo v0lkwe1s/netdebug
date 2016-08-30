@@ -1,21 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   netStats.h
- * Author: williamvolkweis
- *
- * Created on July 26, 2016, 10:35 PM
- */
-
 #ifndef NETSTATS_H
 #define NETSTATS_H
 
-#include "Str.h"
+using namespace std;
 
+#include <stddef.h>
+#include "../../lib/Str.h"
 
 class NetStats {
 public:

@@ -1,10 +1,10 @@
-// Definition of the ClientSocket class
-
 #ifndef ClientSocket_class
 #define ClientSocket_class
 
-#include "../../lib/Socket.h"
+using namespace std;
 
+#include "Socket.h"
+#include "SocketException.h"
 
 class ClientSocket : private Socket
 {
@@ -19,6 +19,5 @@ class ClientSocket : private Socket
   int is_valid();
   
 };
-
 
 #endif

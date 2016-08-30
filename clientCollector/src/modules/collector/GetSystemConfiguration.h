@@ -1,7 +1,8 @@
 #ifndef GETSYSTEMCONFIGURATION_H
 #define GETSYSTEMCONFIGURATION_H
 
-#include "../lib/Str.h"
+using namespace std;
+
 #include <sys/sysinfo.h>
 #include <vector>
 #include <fstream>
@@ -9,10 +10,7 @@
 #include <numeric>
 #include <unistd.h>
 #include <math.h>
-#include "../lib/Serial.h"
-
-using namespace std;
-
+#include "../../lib/Serial.h"
 
 class GetSystemConfiguration {
 public:

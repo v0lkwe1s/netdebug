@@ -1,6 +1,10 @@
 #ifndef DISKSTATS_H
 #define DISKSTATS_H
-#include "Str.h"
+
+using namespace std;
+
+#include "../../lib/Str.h"
+
 class DiskStats {
 public:
   DiskStats();
