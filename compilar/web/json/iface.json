@@ -1,0 +1,3 @@
+{"interfaces":[{"iface": "eth0","MTU": "1500","RX-OK": "458542","RX-ERR": "0","RX-DRP": "0","RX-OVR": "0","TX-OK": "298354","TX-ERR": "0","TX-DRP": "0","TX-OVR": "0","Flg": "BMRU"},
+{"iface": "lo","MTU": "65536","RX-OK": "2823","RX-ERR": "0","RX-DRP": "0","RX-OVR": "0","TX-OK": "2823","TX-ERR": "0","TX-DRP": "0","TX-OVR": "0","Flg": "LRU"} 
+]}

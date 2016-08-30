@@ -1,21 +1,10 @@
 package masterjava.db;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author volkweis
- */
 public class PostgreSql {
        
     public static Connection connect(String host, String port, String database, String user, String pass){
@@ -32,8 +21,6 @@ public class PostgreSql {
         }
         return conn;
     }
-    
     public PostgreSql() {
-        
     }
 }

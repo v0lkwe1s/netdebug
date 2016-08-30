@@ -1,0 +1,84 @@
+autoscan: warning: missing AC_CHECK_FUNCS([getcwd]) wanted by: 
+	src/lib/Str.cpp:59
+autoscan: warning: missing AC_CHECK_FUNCS([memset]) wanted by: 
+	src/modules/socket/Socket.cpp:9
+	src/modules/socket/Socket.cpp:63
+autoscan: warning: missing AC_CHECK_FUNCS([socket]) wanted by: 
+	src/modules/socket/Socket.cpp:17
+autoscan: warning: missing AC_CHECK_FUNCS([sysinfo]) wanted by: 
+	src/modules/collector/GetSystemConfiguration.cpp:74
+autoscan: warning: missing AC_CHECK_HEADERS([arpa/inet.h]) wanted by: 
+	src/modules/socket/Socket.h:10
+autoscan: warning: missing AC_CHECK_HEADERS([fcntl.h]) wanted by: 
+	src/modules/socket/Socket.cpp:5
+autoscan: warning: missing AC_CHECK_HEADERS([limits.h]) wanted by: 
+	src/lib/Str.h:22
+autoscan: warning: missing AC_CHECK_HEADERS([netdb.h]) wanted by: 
+	src/modules/socket/Socket.h:7
+autoscan: warning: missing AC_CHECK_HEADERS([netinet/in.h]) wanted by: 
+	src/modules/socket/Socket.h:6
+autoscan: warning: missing AC_CHECK_HEADERS([stdlib.h]) wanted by: 
+	src/main.cpp:8
+	src/lib/Str.h:17
+autoscan: warning: missing AC_CHECK_HEADERS([string.h]) wanted by: 
+	src/lib/Str.h:15
+	src/modules/socket/Socket.cpp:3
+autoscan: warning: missing AC_CHECK_HEADERS([sys/socket.h]) wanted by: 
+	src/modules/socket/Socket.h:5
+autoscan: warning: missing AC_CHECK_HEADERS([unistd.h]) wanted by: 
+	src/lib/Str.h:23
+	src/modules/collector/GetSystemConfiguration.h:10
+	src/modules/socket/Socket.h:8
+autoscan: warning: missing AC_CHECK_HEADER_STDBOOL wanted by: 
+	src/modules/socket/Socket.h:25
+	src/modules/socket/Socket.h:26
+	src/modules/socket/Socket.h:27
+	src/modules/socket/Socket.h:28
+	src/modules/socket/Socket.h:31
+	src/modules/socket/Socket.h:34
+	src/modules/socket/Socket.h:37
+	src/modules/socket/Socket.h:39
+	src/modules/socket/Socket.cpp:16
+	src/modules/socket/Socket.cpp:24
+	src/modules/socket/Socket.cpp:36
+	src/modules/socket/Socket.cpp:43
+	src/modules/socket/Socket.cpp:54
+	src/modules/socket/Socket.cpp:77
+	src/modules/socket/Socket.cpp:91
+	src/modules/socket/Socket.cpp:18
+	src/modules/socket/Socket.cpp:20
+	src/modules/socket/Socket.cpp:25
+	src/modules/socket/Socket.cpp:32
+	src/modules/socket/Socket.cpp:37
+	src/modules/socket/Socket.cpp:39
+	src/modules/socket/Socket.cpp:48
+	src/modules/socket/Socket.cpp:56
+	src/modules/socket/Socket.cpp:78
+	src/modules/socket/Socket.cpp:84
+	src/modules/socket/Socket.cpp:88
+	src/main.cpp:171
+	src/main.cpp:175
+	src/modules/socket/Socket.cpp:21
+	src/modules/socket/Socket.cpp:33
+	src/modules/socket/Socket.cpp:40
+	src/modules/socket/Socket.cpp:50
+	src/modules/socket/Socket.cpp:57
+	src/modules/socket/Socket.cpp:87
+autoscan: warning: missing AC_PROG_CC wanted by: 
+	config.h.in
+	src/lib/GenericClass.h
+	src/lib/Serial.h
+	src/lib/Str.h
+	src/lib/This.h
+	src/lib/database/DbSqlite.h
+	src/modules/collector/SquidParser.h
+	src/modules/collector/GetSystemConfiguration.h
+	src/modules/collector/DiskStats.h
+	src/modules/collector/NetStats.h
+	src/modules/replicador/SendData.h
+	src/modules/socket/ServerSocket.h
+	src/modules/socket/Socket.h
+	src/modules/socket/ClientSocket.h
+	src/modules/socket/SocketException.h
+autoscan: warning: missing AC_TYPE_SIZE_T wanted by: 
+	src/lib/Str.cpp:94

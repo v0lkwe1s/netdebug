@@ -1,19 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package masterjava.model;
 
-import com.google.gson.JsonArray;
-import java.sql.Date;
 import java.sql.Timestamp;
 import org.json.JSONArray;
 
-/**
- *
- * @author williamvolkweis
- */
 public class _class {
     private Integer id;
     private String host;
@@ -71,7 +60,4 @@ public class _class {
     public void setJson(JSONArray json) {
         this.json = json;
     }
-
-    
-    
 }

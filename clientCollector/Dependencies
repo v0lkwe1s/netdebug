@@ -1,0 +1,6 @@
+sqlite3 
+libsqlite3-dev
+libncurses5-dev
+nodejs
+npm
+run --> npm install http-server -g
