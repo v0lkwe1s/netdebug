@@ -25,8 +25,6 @@ string GetSystemConfiguration::getAll() {
 	json = s.replace(buffer, search, replace);
 	buffer+=getCpuLoad();
 	json = s.replace(buffer, search, replace);
-	buffer+=getMemInfo();
-	json = s.replace(buffer, search, replace);
 	buffer+=getProcessList();
 	json = s.replace(buffer, search, replace);
 	return json;

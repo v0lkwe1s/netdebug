@@ -77,67 +77,67 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/src: ${OBJECTFILES}
 ${OBJECTDIR}/Netdebug.o: Netdebug.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Netdebug.o Netdebug.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Netdebug.o Netdebug.cpp
 
 ${OBJECTDIR}/lib/Serial.o: lib/Serial.cpp 
 	${MKDIR} -p ${OBJECTDIR}/lib
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/Serial.o lib/Serial.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/Serial.o lib/Serial.cpp
 
 ${OBJECTDIR}/lib/Str.o: lib/Str.cpp 
 	${MKDIR} -p ${OBJECTDIR}/lib
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/Str.o lib/Str.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/Str.o lib/Str.cpp
 
 ${OBJECTDIR}/lib/database/DbSqlite.o: lib/database/DbSqlite.cpp 
 	${MKDIR} -p ${OBJECTDIR}/lib/database
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/database/DbSqlite.o lib/database/DbSqlite.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/database/DbSqlite.o lib/database/DbSqlite.cpp
 
 ${OBJECTDIR}/lib/model/This.o: lib/model/This.cpp 
 	${MKDIR} -p ${OBJECTDIR}/lib/model
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/model/This.o lib/model/This.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/model/This.o lib/model/This.cpp
 
 ${OBJECTDIR}/modules/collector/DiskStats.o: modules/collector/DiskStats.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules/collector
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/collector/DiskStats.o modules/collector/DiskStats.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/collector/DiskStats.o modules/collector/DiskStats.cpp
 
 ${OBJECTDIR}/modules/collector/GetSystemConfiguration.o: modules/collector/GetSystemConfiguration.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules/collector
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/collector/GetSystemConfiguration.o modules/collector/GetSystemConfiguration.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/collector/GetSystemConfiguration.o modules/collector/GetSystemConfiguration.cpp
 
 ${OBJECTDIR}/modules/collector/NetStats.o: modules/collector/NetStats.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules/collector
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/collector/NetStats.o modules/collector/NetStats.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/collector/NetStats.o modules/collector/NetStats.cpp
 
 ${OBJECTDIR}/modules/collector/SquidParser.o: modules/collector/SquidParser.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules/collector
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/collector/SquidParser.o modules/collector/SquidParser.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/collector/SquidParser.o modules/collector/SquidParser.cpp
 
 ${OBJECTDIR}/modules/replicador/SendData.o: modules/replicador/SendData.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules/replicador
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/replicador/SendData.o modules/replicador/SendData.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/replicador/SendData.o modules/replicador/SendData.cpp
 
 ${OBJECTDIR}/modules/socket/ClientSocket.o: modules/socket/ClientSocket.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules/socket
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/socket/ClientSocket.o modules/socket/ClientSocket.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/socket/ClientSocket.o modules/socket/ClientSocket.cpp
 
 ${OBJECTDIR}/modules/socket/ServerSocket.o: modules/socket/ServerSocket.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules/socket
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/socket/ServerSocket.o modules/socket/ServerSocket.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/socket/ServerSocket.o modules/socket/ServerSocket.cpp
 
 ${OBJECTDIR}/modules/socket/Socket.o: modules/socket/Socket.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules/socket
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/socket/Socket.o modules/socket/Socket.cpp
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/socket/Socket.o modules/socket/Socket.cpp
 
 # Subprojects
 .build-subprojects:

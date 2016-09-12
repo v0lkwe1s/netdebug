@@ -84,7 +84,9 @@
       </toolsSet>
       <compileType>
         <ccTool>
+          <standard>8</standard>
           <commandLine>-lpthread --std=c++11 -lsqlite3</commandLine>
+          <warningLevel>3</warningLevel>
         </ccTool>
       </compileType>
       <item path="Netdebug.cpp" ex="false" tool="1" flavor2="0">

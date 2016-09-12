@@ -19,7 +19,6 @@
 using namespace std;
 
 Str s;
-GetSystemConfiguration g;
 
 void initHttpServer();
 void getStats();
@@ -31,22 +30,22 @@ void proxy();
 
 int main(int argc, char** argv) {
 //	thread server(serverSocket);
-//	thread serverHttp(initHttpServer);
-//	//thread system (getStats);
+	thread serverHttp(initHttpServer);
+        thread system (getStats);
 //	thread net (getNetStats);
 //	thread arp (getArpTable);
-//	thread disk (getFileSystemInfo);
+	thread disk (getFileSystemInfo);
 //	thread squidProxy (proxy);
 	unsigned long int x =0;
-	
 	for (;;){
+            cout << x++ << endl;
 //		cout << "Node Server - " << server.get_id() << endl;
 //		cout << "Net Stats   - " << net.get_id() << endl;
 //		cout << "Disk Stats  - " << disk.get_id() << endl;
 //		cout << "Arp Table   - " << arp.get_id() << endl;
 //		cout << "squid       - " << squidProxy.get_id() << endl;
 		//cout << "All Stats   - " << system.get_id() << endl;
-	sleep(30);
+	sleep(60);
 	}
     return 0;
 }
@@ -74,8 +73,8 @@ void getArpTable(){
 			sleep(10);
 		}
 		netStats.~NetStats();
-	} catch (const std::bad_alloc&) {
-		cout << "getArpTable" << endl;
+	} catch (exception& e) {
+		cout << e.what() << endl;
 	}
 }
 void getNetStats(){
@@ -87,26 +86,27 @@ void getNetStats(){
 			s.createFileText(netStats.getIfaces(), comm);
 			sleep(10);
 		}
-	} catch (const std::bad_alloc&) {
-		cout << "getNetStats" << endl;
+	} catch (exception& e) {
+		cout << e.what() << endl;
 	}	
 }
 void initHttpServer(){
 	try {
-		string comm = "http-server -s -c 1 -p 8800 "; 
+		string comm = "http-server -s -c 1 -p 8800"; 
 			comm+= s.getCurrentPath();
 			comm+= "/web";
 			cout << "server\n";
 		system(comm.c_str());
-	} catch (const std::bad_alloc&) {
-		cout << "initHttpServer" << endl;
+	} catch (exception& e) {
+		cout << e.what() << endl;
 	}	
 }
 void getStats(){
 	try {
+            GetSystemConfiguration g;
 		for (;;) {
 			DbSqlite db;
-			db.open("Database/netdebug.db");
+			db.open("Database/Netdebug.db");
 			string comm = s.getCurrentPath();
 				comm+= "/web/json/config.json";
 			s.createFileText(g.getAll(), comm);
@@ -117,30 +117,30 @@ void getStats(){
 				sql+= g.getAll();
 				sql+= "')";
 				db.crud(sql.c_str());
-				g.~GetSystemConfiguration();
+				
 				sleep(1);
-			} catch (const std::bad_alloc& e) {
-				cout << e.what() << endl;
+			} catch (exception& e) {
+                            cout << e.what() << endl;
 			}		
 			SendData sd;
-			vector<GenericClass*> disk;
 			string sql = "select * from stats";
-			disk = sd.getFromDb(db, sql);
+			sd.getFromDb(db, sql);
+                        
 			sd.~SendData();
 			db.~DbSqlite();
 			sleep(3);
 		}
-	} catch (const std::bad_alloc& e) {
+            g.~GetSystemConfiguration();
+	} catch (exception& e) {
 		cout << e.what() << endl;
 	}	
 }
 void getFileSystemInfo(){
 	DiskStats ds; 
 	for (;;) {
-		sleep(2);
 		try {
 			DbSqlite db;
-			db.open("Database/netdebug.db");
+			db.open("Database/Netdebug.db");
 			string comm = s.getCurrentPath();
 				comm+= "/web/json/disk.json";
 			s.createFileText(ds.getFileSystems(), comm);
@@ -151,17 +151,17 @@ void getFileSystemInfo(){
 				sql+= ds.getFileSystems();
 				sql+= "')";
 				db.crud(sql.c_str());
-				g.~GetSystemConfiguration();
 				sleep(1);
 			} catch (const std::bad_alloc& e) {
 				cout << e.what() << endl;
 			}		
-			SendData sd;
-			vector<GenericClass*> disk;
+                        sleep(1);
+                        SendData sd;
 			string sql = "select * from disk";
-			disk = sd.getFromDb(db, sql);
+			sd.getFromDb(db, sql);
 			sd.~SendData();
 			db.~DbSqlite();
+                        sleep(3600);
 		} catch (exception& e) {
 			cout << e.what() << endl;
 		}
