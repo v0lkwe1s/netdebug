@@ -22,11 +22,11 @@ void Str::split(const string& s, char c, vector<string>& v) {
     }
 }
 
-vector<string> split(string str, char delimiter) {
+vector<string> Str::split(string str, char delimiter) {
 	vector<string> internal;
 	stringstream ss(str); // Turn the string into a stream.
 	string tok;
-
+        
 	while(getline(ss, tok, delimiter)) {
 	  internal.push_back(tok);
 	}
@@ -47,7 +47,7 @@ string Str::getFileText(string file) {
 	if (myfile.is_open()) {
             while (!myfile.eof()) {
                 getline(myfile, line);
-                text+= line;
+                text+= line+"\n";
             }
         myfile.close();
 	} else text = "Err";

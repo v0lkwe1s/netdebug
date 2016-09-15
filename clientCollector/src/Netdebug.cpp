@@ -15,6 +15,7 @@
 #include "lib/database/DbSqlite.h"
 #include "modules/socket/SocketException.h"
 #include "lib/model/GenericClass.h"
+#include "modules/VpnUsers.h"
 
 using namespace std;
 
@@ -29,13 +30,17 @@ void serverSocket();
 void proxy();
 
 int main(int argc, char** argv) {
-	thread server(serverSocket);
-	thread serverHttp(initHttpServer);
-        thread system (getStats);
-	thread net (getNetStats);
-	thread arp (getArpTable);
-	thread disk (getFileSystemInfo);
-	thread squidProxy (proxy);
+//	thread server(serverSocket);
+//	thread serverHttp(initHttpServer);
+//        thread system (getStats);
+//	thread net (getNetStats);
+//	thread arp (getArpTable);
+//	thread disk (getFileSystemInfo);
+//	thread squidProxy (proxy);
+    VpnUsers vpn;  
+    Users u;
+    u.SetLogin("root");
+    vpn.saveUser(u);
 	unsigned long int x =0;
 	for (;;){
             cout << x++ << endl;

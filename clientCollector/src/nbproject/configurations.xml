@@ -32,8 +32,12 @@
         <itemPath>modules/collector/SquidParser.h</itemPath>
       </logicalFolder>
       <logicalFolder name="vpn" displayName="network" projectFiles="true">
+        <itemPath>modules/Group.cpp</itemPath>
+        <itemPath>modules/Group.h</itemPath>
         <itemPath>modules/Users.cpp</itemPath>
         <itemPath>modules/Users.h</itemPath>
+        <itemPath>modules/VpnUsers.cpp</itemPath>
+        <itemPath>modules/VpnUsers.h</itemPath>
       </logicalFolder>
       <logicalFolder name="replicador" displayName="replicador" projectFiles="true">
         <itemPath>modules/replicador/SendData.cpp</itemPath>
@@ -90,7 +94,6 @@
         <ccTool>
           <standard>8</standard>
           <commandLine>-lpthread --std=c++11 -lsqlite3</commandLine>
-          <warningLevel>3</warningLevel>
         </ccTool>
       </compileType>
       <item path="Netdebug.cpp" ex="false" tool="1" flavor2="0">
@@ -113,9 +116,17 @@
       </item>
       <item path="lib/model/This.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="modules/Group.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/Group.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="modules/Users.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="modules/Users.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/VpnUsers.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/VpnUsers.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="modules/collector/DiskStats.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -198,9 +209,17 @@
       </item>
       <item path="lib/model/This.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="modules/Group.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/Group.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="modules/Users.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="modules/Users.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="modules/VpnUsers.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="modules/VpnUsers.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="modules/collector/DiskStats.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -40,7 +40,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/lib/Str.o \
 	${OBJECTDIR}/lib/database/DbSqlite.o \
 	${OBJECTDIR}/lib/model/This.o \
+	${OBJECTDIR}/modules/Group.o \
 	${OBJECTDIR}/modules/Users.o \
+	${OBJECTDIR}/modules/VpnUsers.o \
 	${OBJECTDIR}/modules/collector/DiskStats.o \
 	${OBJECTDIR}/modules/collector/GetSystemConfiguration.o \
 	${OBJECTDIR}/modules/collector/NetStats.o \
@@ -100,10 +102,20 @@ ${OBJECTDIR}/lib/model/This.o: lib/model/This.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/model/This.o lib/model/This.cpp
 
+${OBJECTDIR}/modules/Group.o: modules/Group.cpp 
+	${MKDIR} -p ${OBJECTDIR}/modules
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/Group.o modules/Group.cpp
+
 ${OBJECTDIR}/modules/Users.o: modules/Users.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/Users.o modules/Users.cpp
+
+${OBJECTDIR}/modules/VpnUsers.o: modules/VpnUsers.cpp 
+	${MKDIR} -p ${OBJECTDIR}/modules
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/VpnUsers.o modules/VpnUsers.cpp
 
 ${OBJECTDIR}/modules/collector/DiskStats.o: modules/collector/DiskStats.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules/collector

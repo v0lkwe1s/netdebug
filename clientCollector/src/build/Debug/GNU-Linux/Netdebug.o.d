@@ -17,7 +17,8 @@ build/Debug/GNU-Linux/Netdebug.o: Netdebug.cpp \
  modules/replicador/../../lib/database/../../lib/Str.h \
  modules/replicador/../../lib/database/../../lib/model/GenericClass.h \
  modules/collector/DiskStats.h lib/database/DbSqlite.h \
- modules/socket/SocketException.h lib/model/GenericClass.h
+ modules/socket/SocketException.h lib/model/GenericClass.h \
+ modules/VpnUsers.h modules/Users.h modules/../lib/Str.h
 
 modules/collector/GetSystemConfiguration.h:
 
@@ -68,3 +69,9 @@ lib/database/DbSqlite.h:
 modules/socket/SocketException.h:
 
 lib/model/GenericClass.h:
+
+modules/VpnUsers.h:
+
+modules/Users.h:
+
+modules/../lib/Str.h:
