@@ -3,64 +3,40 @@
 
 using namespace std;
 
+#include "../lib/Str.h"
+
 class Users {
 public:
     Users();
     
     Users(const Users& orig);
     
-    void saveUser(Users user){
-        cout << user.GetId() << endl;
-    }
+    void saveUser(Users user);
     
-    void delUser(Users user){
-        
-    }
-    void deactiveUser(Users user){
-        
-    }
+    void delUser(Users user);
+    void deactiveUser(Users user);
     
     Users(int id, string name, string login, string password, int group);
 
-    int GetGroup() const {
-        return group;
-    }
+    int GetGroup() const;
 
-    void SetGroup(int group) {
-        this->group = group;
-    }
+    void SetGroup(int group);
 
-    int GetId() const {
-        return id;
-    }
+    int GetId() const;
 
-    void SetId(int id) {
-        this->id = id;
-    }
+    void SetId(int id);
 
-    string GetLogin() const {
-        return login;
-    }
+    string GetLogin() const;
 
-    void SetLogin(string login) {
-        this->login = login;
-    }
+    void SetLogin(string login);
 
-    string GetName() const {
-        return name;
-    }
+    string GetName() const;
 
-    void SetName(string name) {
-        this->name = name;
-    }
+    void SetName(string name);
 
-    string GetPassword() const {
-        return password;
-    }
+    string GetPassword() const;
 
-    void SetPassword(string password) {
-        this->password = password;
-    }
+    void SetPassword(string password);
 
     
     virtual ~Users();
