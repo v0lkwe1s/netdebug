@@ -1,9 +1,8 @@
 {"disk":[{"fs": "/dev/sda1","size": "286G","used": "15G","available": "258G","used%": "6%","mounted": "/"},
 {"fs": "udev","size": "10M","used": "0","available": "10M","used%": "0%","mounted": "/dev"},
-{"fs": "tmpfs","size": "751M","used": "13M","available": "739M","used%": "2%","mounted": "/run"},
+{"fs": "tmpfs","size": "751M","used": "10M","available": "741M","used%": "2%","mounted": "/run"},
 {"fs": "tmpfs","size": "1.9G","used": "80K","available": "1.9G","used%": "1%","mounted": "/dev/shm"},
 {"fs": "tmpfs","size": "5.0M","used": "4.0K","available": "5.0M","used%": "1%","mounted": "/run/lock"},
 {"fs": "tmpfs","size": "1.9G","used": "0","available": "1.9G","used%": "0%","mounted": "/sys/fs/cgroup"},
-{"fs": "tmpfs","size": "376M","used": "8.0K","available": "376M","used%": "1%","mounted": "/run/user/1000"},
-{"fs": "tmpfs","size": "376M","used": "0","available": "376M","used%": "0%","mounted": "/run/user/0"} 
+{"fs": "tmpfs","size": "376M","used": "8.0K","available": "376M","used%": "1%","mounted": "/run/user/1000"} 
 ]}
