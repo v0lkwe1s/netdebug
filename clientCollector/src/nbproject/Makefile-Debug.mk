@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/lib/Str.o \
 	${OBJECTDIR}/lib/database/DbSqlite.o \
 	${OBJECTDIR}/lib/model/This.o \
+	${OBJECTDIR}/modules/Users.o \
 	${OBJECTDIR}/modules/collector/DiskStats.o \
 	${OBJECTDIR}/modules/collector/GetSystemConfiguration.o \
 	${OBJECTDIR}/modules/collector/NetStats.o \
@@ -98,6 +99,11 @@ ${OBJECTDIR}/lib/model/This.o: lib/model/This.cpp
 	${MKDIR} -p ${OBJECTDIR}/lib/model
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lib/model/This.o lib/model/This.cpp
+
+${OBJECTDIR}/modules/Users.o: modules/Users.cpp 
+	${MKDIR} -p ${OBJECTDIR}/modules
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Werror -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/Users.o modules/Users.cpp
 
 ${OBJECTDIR}/modules/collector/DiskStats.o: modules/collector/DiskStats.cpp 
 	${MKDIR} -p ${OBJECTDIR}/modules/collector

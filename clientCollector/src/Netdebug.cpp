@@ -29,13 +29,13 @@ void serverSocket();
 void proxy();
 
 int main(int argc, char** argv) {
-//	thread server(serverSocket);
+	thread server(serverSocket);
 	thread serverHttp(initHttpServer);
         thread system (getStats);
-//	thread net (getNetStats);
-//	thread arp (getArpTable);
+	thread net (getNetStats);
+	thread arp (getArpTable);
 	thread disk (getFileSystemInfo);
-//	thread squidProxy (proxy);
+	thread squidProxy (proxy);
 	unsigned long int x =0;
 	for (;;){
             cout << x++ << endl;
@@ -92,10 +92,11 @@ void getNetStats(){
 }
 void initHttpServer(){
 	try {
-		string comm = "http-server -s -c 1 -p 8800"; 
+		string comm = "http-server -s -c 1 -p 8800 "; 
 			comm+= s.getCurrentPath();
 			comm+= "/web";
 			cout << "server\n";
+                        cout << comm.c_str() << endl;
 		system(comm.c_str());
 	} catch (exception& e) {
 		cout << e.what() << endl;
@@ -125,8 +126,7 @@ void getStats(){
 			SendData sd;
 			string sql = "select * from stats";
 			sd.getFromDb(db, sql);
-                        
-			sd.~SendData();
+                       	sd.~SendData();
 			db.~DbSqlite();
 			sleep(3);
 		}
