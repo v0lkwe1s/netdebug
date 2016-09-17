@@ -31,10 +31,6 @@
         <itemPath>modules/collector/SquidParser.cpp</itemPath>
         <itemPath>modules/collector/SquidParser.h</itemPath>
       </logicalFolder>
-      <logicalFolder name="vpn" displayName="network" projectFiles="true">
-        <itemPath>modules/Users.cpp</itemPath>
-        <itemPath>modules/Users.h</itemPath>
-      </logicalFolder>
       <logicalFolder name="replicador" displayName="replicador" projectFiles="true">
         <itemPath>modules/replicador/SendData.cpp</itemPath>
         <itemPath>modules/replicador/SendData.h</itemPath>
@@ -119,10 +115,6 @@
       <item path="lib/model/This.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="lib/model/This.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="modules/Users.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="modules/Users.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="modules/collector/DiskStats.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -212,10 +204,6 @@
       <item path="lib/model/This.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="lib/model/This.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="modules/Users.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="modules/Users.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="modules/collector/DiskStats.cpp" ex="false" tool="1" flavor2="0">
       </item>

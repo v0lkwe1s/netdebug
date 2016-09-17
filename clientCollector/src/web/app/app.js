@@ -28,14 +28,14 @@ app.controller('overviewTab', function($rootScope, $http, $scope, $location, $in
 			$http.get("json/config.json").then(function(response) {
 				$scope.hostInfo = response.data;
 			});
-			$http.get("http://127.0.0.1:30000/json/disk/").then(function(response) {
+			$http.get("http://192.168.1.112:30000/json/disk/").then(function(response) {
 				$scope.DiskInfo = response.data;
 			});
 
-			$http.get("http://127.0.0.1:30000/json/ifaces/").then(function(response) {
+			$http.get("http://192.168.1.112:30000/json/ifaces/").then(function(response) {
 				$scope.InetIface = response.data;
 			});
-            $http.get("http://127.0.0.1:30000/json/arp").then(function(response) {
+            $http.get("http://192.168.1.112:30000/json/arp").then(function(response) {
 				$scope.InetArp = response.data;
 			});
     }, 3000);

@@ -7,15 +7,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/home/tcc/netdebug/clientCollector/src/modules/socket/ServerSocket.h</file>
-            <file>file:/home/tcc/netdebug/clientCollector/src/modules/socket/Socket.h</file>
-            <file>file:/home/tcc/netdebug/clientCollector/src/Netdebug.cpp</file>
-            <file>file:/home/tcc/netdebug/clientCollector/src/modules/socket/Socket.cpp</file>
-            <file>file:/home/tcc/netdebug/clientCollector/src/modules/socket/ServerSocket.cpp</file>
-=======
+            <file>file:/home/Sources/netdebug/clientCollector/src/modules/collector/NetStats.h</file>
+            <file>file:/home/Sources/netdebug/clientCollector/src/lib/Str.h</file>
+            <file>file:/home/Sources/netdebug/clientCollector/src/lib/database/DbSqlite.cpp</file>
+            <file>file:/home/Sources/netdebug/clientCollector/src/modules/vpn/Users.h</file>
+            <file>file:/home/Sources/netdebug/clientCollector/src/Makefile</file>
+            <file>file:/home/Sources/netdebug/clientCollector/src/modules/vpn/Group.cpp</file>
+            <file>file:/home/Sources/netdebug/clientCollector/src/modules/collector/GetSystemConfiguration.h</file>
+            <file>file:/home/Sources/netdebug/clientCollector/src/modules/collector/GetSystemConfiguration.cpp</file>
+            <file>file:/home/Sources/netdebug/clientCollector/src/lib/Str.cpp</file>
+            <file>file:/home/Sources/netdebug/clientCollector/src/modules/vpn/Group.h</file>
             <file>file:/home/Sources/netdebug/clientCollector/src/Netdebug.cpp</file>
->>>>>>> df0a43098e1d5d7754bdbb6ace344ab387fdfce2
+            <file>file:/home/Sources/netdebug/clientCollector/src/modules/collector/NetStats.cpp</file>
+            <file>file:/home/Sources/netdebug/clientCollector/src/modules/vpn/Users.cpp</file>
         </group>
     </open-files>
 </project-private>

@@ -30,23 +30,15 @@ void serverSocket();
 void proxy();
 
 int main(int argc, char** argv) {
-<<<<<<< HEAD
+
     thread server(serverSocket);
-//    thread serverHttp(initHttpServer);
+    thread serverHttp(initHttpServer);
 //    thread system (getStats);
 //    thread net (getNetStats);
 //    thread arp (getArpTable);
 //    thread disk (getFileSystemInfo);
     //thread squidProxy (proxy);
-=======
-	thread server(serverSocket);
-	thread serverHttp(initHttpServer);
-        thread system (getStats);
-	thread net (getNetStats);
-	thread arp (getArpTable);
-	thread disk (getFileSystemInfo);
-	thread squidProxy (proxy);
->>>>>>> df0a43098e1d5d7754bdbb6ace344ab387fdfce2
+
 	unsigned long int x =0;
 	for (;;){
 		//cout << x++ << endl;
@@ -189,18 +181,20 @@ void serverSocket(){
                     string data;
                     new_sock >> data;
 					
-						//cout << data << endl;
-						vector<string> line;
-						line = s.split(data, '\n');
-						
-						for (int i = 0; i < line.size(); i++) {
-							cout << i  << " Length " << line[i].length() << " ------  " << line[i] << endl;
-							if (line[i].length() == 1) {
-								cout << "Douvle" << endl;
-							}
-						}
+                    //cout << data << endl;
+                    vector<string> line;
+                    line = s.split(data, '\n');
 
-						//cout << "\n\n\n\n\n" << endl;
+                    for (int i = 0; i < line.size(); i++) {
+                        if (line[i].length() == 1) {
+                            if (i+1 < line.size()){
+                            cout << line[i+1]<< endl;
+                            }
+                        }
+                    }
+                    
+
+                    //cout << "\n\n\n\n\n" << endl;
                     if (data.find("HTTP/1.1")) {
                         string path = s.getUrlPath(data);
                         data = "HTTP/1.1 200 OK\r\n";
@@ -217,11 +211,11 @@ void serverSocket(){
                         } else if (path == "/json/cpuinfo") {
                             GetSystemConfiguration g;
                             data+= g.getCpuInfo().c_str();
-						} else if (path == "/json/disk") {
+                        } else if (path == "/json/disk") {
                             DiskStats ds;
                             data+= ds.getFileSystems().c_str();
                         } else {
-                            data+="teste";
+                            data+="Function not exists";
                         }
                     }
                     new_sock << data;
