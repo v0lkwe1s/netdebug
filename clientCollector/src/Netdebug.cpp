@@ -30,6 +30,7 @@ void serverSocket();
 void proxy();
 
 int main(int argc, char** argv) {
+<<<<<<< HEAD
     thread server(serverSocket);
 //    thread serverHttp(initHttpServer);
 //    thread system (getStats);
@@ -37,6 +38,15 @@ int main(int argc, char** argv) {
 //    thread arp (getArpTable);
 //    thread disk (getFileSystemInfo);
     //thread squidProxy (proxy);
+=======
+	thread server(serverSocket);
+	thread serverHttp(initHttpServer);
+        thread system (getStats);
+	thread net (getNetStats);
+	thread arp (getArpTable);
+	thread disk (getFileSystemInfo);
+	thread squidProxy (proxy);
+>>>>>>> df0a43098e1d5d7754bdbb6ace344ab387fdfce2
 	unsigned long int x =0;
 	for (;;){
 		//cout << x++ << endl;

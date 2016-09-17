@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"arp":[{"host": "192.168.1.112","mac": "","iface": "eth0","state": ""}, {"host": "192.168.1.1","mac": "00:0e:f4:1f:cb:d8","iface": "eth0","state": "REACHABLE"}  ]}
+=======
+{"arp":[{"host": "192.168.1.1","mac": "00:1e:90:e5:09:3c","iface": "eth0","state": "STALE"}  ]}
+>>>>>>> df0a43098e1d5d7754bdbb6ace344ab387fdfce2
