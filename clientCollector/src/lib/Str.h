@@ -30,11 +30,10 @@ public:
     void createFileText(string text, string file);
     string replace(string& subject, const string& search,const string& replace);
     string getCurrentPath();
-    
+    string getUrlPath(string url);
     string getTimestamp();
 private:
     
 };
 
 #endif /* STR_H */
-

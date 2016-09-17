@@ -28,6 +28,7 @@ public class Main {
     }
   }
 }
+
 class EchoHandler extends Thread {
   Socket client;
   EchoHandler (Socket client) {
@@ -70,7 +71,9 @@ class EchoHandler extends Thread {
                     writer.println("done");
                     }
                 } else {
-                    ;
+                    
+                    System.out.println(line);
+                    writer.println("ok");
                 } 
             }
         } catch (Exception e) {

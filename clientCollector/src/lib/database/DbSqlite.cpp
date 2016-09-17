@@ -22,7 +22,7 @@ void DbSqlite::crud(const char* sql){
 		rc = sqlite3_exec(db, sql, callback, 0, &errMsg);
 		(rc != SQLITE_OK) ? cout << errMsg : cout << ""; 
 	} catch (exception e){
-		cout << e.what() << endl;
+		cout << "Este Chato " << e.what() << endl;
 	}
 }
 

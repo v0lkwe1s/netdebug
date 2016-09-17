@@ -14,7 +14,7 @@ using namespace std;
 
 const int MAXHOSTNAME = 200;
 const int MAXCONNECTIONS = 5;
-const int MAXRECV = 500;
+const int MAXRECV = 5000;
 
 class Socket {
 public:

@@ -15,6 +15,7 @@
 #include "lib/database/DbSqlite.h"
 #include "modules/socket/SocketException.h"
 #include "lib/model/GenericClass.h"
+#include "modules/vpn/VpnUsers.h"
 
 using namespace std;
 
@@ -29,16 +30,16 @@ void serverSocket();
 void proxy();
 
 int main(int argc, char** argv) {
-//	thread server(serverSocket);
-	thread serverHttp(initHttpServer);
-        thread system (getStats);
-//	thread net (getNetStats);
-//	thread arp (getArpTable);
-	thread disk (getFileSystemInfo);
-//	thread squidProxy (proxy);
+    thread server(serverSocket);
+//    thread serverHttp(initHttpServer);
+//    thread system (getStats);
+//    thread net (getNetStats);
+//    thread arp (getArpTable);
+//    thread disk (getFileSystemInfo);
+    //thread squidProxy (proxy);
 	unsigned long int x =0;
 	for (;;){
-            cout << x++ << endl;
+		//cout << x++ << endl;
 //		cout << "Node Server - " << server.get_id() << endl;
 //		cout << "Net Stats   - " << net.get_id() << endl;
 //		cout << "Disk Stats  - " << disk.get_id() << endl;
@@ -64,18 +65,18 @@ void proxy(){
 	}
 }
 void getArpTable(){
-		try {
-		NetStats netStats; 
-		for (;;) {
-			string comm = s.getCurrentPath();
-				comm+= "/web/json/arp.json";
-			s.createFileText(netStats.getArpTable(),comm);
-			sleep(10);
-		}
-		netStats.~NetStats();
-	} catch (exception& e) {
-		cout << e.what() << endl;
-	}
+    NetStats netStats; 
+    try {
+        for (;;) {
+            string comm = s.getCurrentPath();
+                comm+= "/web/json/arp.json";
+            s.createFileText(netStats.getArpTable(),comm);
+            sleep(10);
+        }
+    } catch (exception& e) {
+        cout << e.what() << endl;
+    }
+    netStats.~NetStats();
 }
 void getNetStats(){
 	try {
@@ -92,10 +93,11 @@ void getNetStats(){
 }
 void initHttpServer(){
 	try {
-		string comm = "http-server -s -c 1 -p 8800"; 
+		string comm = "http-server -s -c 1 -p 8800 "; 
 			comm+= s.getCurrentPath();
 			comm+= "/web";
 			cout << "server\n";
+                        cout << comm.c_str() << endl;
 		system(comm.c_str());
 	} catch (exception& e) {
 		cout << e.what() << endl;
@@ -117,16 +119,14 @@ void getStats(){
 				sql+= g.getAll();
 				sql+= "')";
 				db.crud(sql.c_str());
-				
 				sleep(1);
 			} catch (exception& e) {
-                            cout << e.what() << endl;
+				cout << e.what() << endl;
 			}		
 			SendData sd;
 			string sql = "select * from stats";
 			sd.getFromDb(db, sql);
-                        
-			sd.~SendData();
+                       	sd.~SendData();
 			db.~DbSqlite();
 			sleep(3);
 		}
@@ -161,42 +161,66 @@ void getFileSystemInfo(){
 			sd.getFromDb(db, sql);
 			sd.~SendData();
 			db.~DbSqlite();
-                        sleep(3600);
+                        sleep(30);
 		} catch (exception& e) {
 			cout << e.what() << endl;
 		}
 	}
 }
 void serverSocket(){
-	try {
-		ServerSocket server(30000);
-		NetStats netStats;
-		while (true){
-			ServerSocket new_sock;
-			server.accept (new_sock);
-			try {
-				while (true){
-					string data;
-					new_sock >> data;
-					if (data.find("HTTP")) {
-						cout << "browser" << endl;
-						data = "HTTP/1.1 200 OK\r\n";
-						data+= "Content-Type: application/json\r\n";
-						data+= "Connection: close\r\n\r\n";
-						//este break é utilizado para que os navegadores não fiquem
-						//aguardando o fim do cabeçalho
-						data+= netStats.getArpTable().c_str();
-						new_sock << data;
-						break;
-					}
-					data = netStats.getArpTable().c_str();
-					new_sock << data;
-				}
-			}
-			catch (SocketException&) {}
-			netStats.~NetStats();
-		}
+    try {
+        ServerSocket server(30000);
+        NetStats netStats;
+        while (true){
+            ServerSocket new_sock;
+            server.accept (new_sock);
+            try {
+                while (true){
+                    string data;
+                    new_sock >> data;
+					
+						//cout << data << endl;
+						vector<string> line;
+						line = s.split(data, '\n');
+						
+						for (int i = 0; i < line.size(); i++) {
+							cout << i  << " Length " << line[i].length() << " ------  " << line[i] << endl;
+							if (line[i].length() == 1) {
+								cout << "Douvle" << endl;
+							}
+						}
+
+						//cout << "\n\n\n\n\n" << endl;
+                    if (data.find("HTTP/1.1")) {
+                        string path = s.getUrlPath(data);
+                        data = "HTTP/1.1 200 OK\r\n";
+                        data+="Access-Control-Allow-Headers: Content-Type, X-Requested-With \r\n";
+                        data+="Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS \r\n";
+                        data+="Access-Control-Allow-Origin: * \r\n";
+                        data+= "Content-Type: application/json\r\n";
+                        data+= "Connection: close\r\n\r\n";
+                        
+                        if (path == "/json/arp") {
+                            data+= netStats.getArpTable().c_str();
+                        } else if (path == "/json/ifaces") {
+                            data+= netStats.getIfaces().c_str();
+                        } else if (path == "/json/cpuinfo") {
+                            GetSystemConfiguration g;
+                            data+= g.getCpuInfo().c_str();
+						} else if (path == "/json/disk") {
+                            DiskStats ds;
+                            data+= ds.getFileSystems().c_str();
+                        } else {
+                            data+="teste";
+                        }
+                    }
+                    new_sock << data;
+                    break;
+                }
+            } catch (SocketException&) {}
+                netStats.~NetStats();
+            }
 	} catch (SocketException& e) {
-      std::cout << "Exception was caught:" << e.description() << "\nExiting.\n";
+        cout << e.description() << "\nExiting.\n";
     }
 }

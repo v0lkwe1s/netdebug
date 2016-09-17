@@ -47,7 +47,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/modules/replicador/SendData.o \
 	${OBJECTDIR}/modules/socket/ClientSocket.o \
 	${OBJECTDIR}/modules/socket/ServerSocket.o \
-	${OBJECTDIR}/modules/socket/Socket.o
+	${OBJECTDIR}/modules/socket/Socket.o \
+	${OBJECTDIR}/modules/vpn/Group.o \
+	${OBJECTDIR}/modules/vpn/Users.o
 
 
 # C Compiler Flags
@@ -138,6 +140,16 @@ ${OBJECTDIR}/modules/socket/Socket.o: modules/socket/Socket.cpp
 	${MKDIR} -p ${OBJECTDIR}/modules/socket
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/socket/Socket.o modules/socket/Socket.cpp
+
+${OBJECTDIR}/modules/vpn/Group.o: modules/vpn/Group.cpp 
+	${MKDIR} -p ${OBJECTDIR}/modules/vpn
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/vpn/Group.o modules/vpn/Group.cpp
+
+${OBJECTDIR}/modules/vpn/Users.o: modules/vpn/Users.cpp 
+	${MKDIR} -p ${OBJECTDIR}/modules/vpn
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/modules/vpn/Users.o modules/vpn/Users.cpp
 
 # Subprojects
 .build-subprojects:

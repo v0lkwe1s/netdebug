@@ -1,9 +1,12 @@
-{"disk":[{"fs": "/dev/sda1","size": "286G","used": "15G","available": "258G","used%": "6%","mounted": "/"},
-{"fs": "udev","size": "10M","used": "0","available": "10M","used%": "0%","mounted": "/dev"},
-{"fs": "tmpfs","size": "751M","used": "13M","available": "739M","used%": "2%","mounted": "/run"},
-{"fs": "tmpfs","size": "1.9G","used": "80K","available": "1.9G","used%": "1%","mounted": "/dev/shm"},
+{"disk":[{"fs": "udev","size": "3.9G","used": "0","available": "3.9G","used%": "0%","mounted": "/dev"},
+{"fs": "tmpfs","size": "787M","used": "32M","available": "756M","used%": "4%","mounted": "/run"},
+{"fs": "/dev/sda5","size": "92G","used": "27G","available": "61G","used%": "31%","mounted": "/"},
+{"fs": "tmpfs","size": "3.9G","used": "76M","available": "3.8G","used%": "2%","mounted": "/dev/shm"},
 {"fs": "tmpfs","size": "5.0M","used": "4.0K","available": "5.0M","used%": "1%","mounted": "/run/lock"},
-{"fs": "tmpfs","size": "1.9G","used": "0","available": "1.9G","used%": "0%","mounted": "/sys/fs/cgroup"},
-{"fs": "tmpfs","size": "376M","used": "8.0K","available": "376M","used%": "1%","mounted": "/run/user/1000"},
-{"fs": "tmpfs","size": "376M","used": "0","available": "376M","used%": "0%","mounted": "/run/user/0"} 
+{"fs": "tmpfs","size": "3.9G","used": "0","available": "3.9G","used%": "0%","mounted": "/sys/fs/cgroup"},
+{"fs": "/dev/sda7","size": "14G","used": "36M","available": "13G","used%": "1%","mounted": "/tmp"},
+{"fs": "/dev/sda8","size": "19G","used": "14G","available": "4.0G","used%": "78%","mounted": "/var"},
+{"fs": "/dev/sda6","size": "367G","used": "282G","available": "67G","used%": "81%","mounted": "/home"},
+{"fs": "tmpfs","size": "787M","used": "0","available": "787M","used%": "0%","mounted": "/run/user/112"},
+{"fs": "tmpfs","size": "787M","used": "12K","available": "787M","used%": "1%","mounted": "/run/user/1000"} 
 ]}

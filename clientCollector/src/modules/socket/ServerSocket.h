@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   ServerSocket.h
- * Author: williamvolkweis
- *
- * Created on August 6, 2016, 10:11 PM
- */
-
 #ifndef SERVERSOCKET_H
 #define SERVERSOCKET_H
 

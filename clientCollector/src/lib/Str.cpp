@@ -9,6 +9,21 @@ Str::Str(const Str& orig) {
 Str::~Str() {
 }
 
+string Str::getUrlPath(string url)
+{
+	vector<string> line;
+	line = split(url, '\n');
+	vector<string> path;
+	path = split(line[0], ' ');
+	//@POG
+	if ((path[1][strlen(path[1].c_str()) - 1]) == '/') {
+		path[1][strlen(path[1].c_str()) - 1] = ' ';
+	}
+	path[1] = subString(path[1].c_str(), " ");
+	//#
+	return path[1];
+}
+
 void Str::split(const string& s, char c, vector<string>& v) {
     string::size_type i = 0;
     string::size_type j = s.find(c);
@@ -22,11 +37,11 @@ void Str::split(const string& s, char c, vector<string>& v) {
     }
 }
 
-vector<string> split(string str, char delimiter) {
+vector<string> Str::split(string str, char delimiter) {
 	vector<string> internal;
 	stringstream ss(str); // Turn the string into a stream.
 	string tok;
-
+        
 	while(getline(ss, tok, delimiter)) {
 	  internal.push_back(tok);
 	}
@@ -47,7 +62,7 @@ string Str::getFileText(string file) {
 	if (myfile.is_open()) {
             while (!myfile.eof()) {
                 getline(myfile, line);
-                text+= line;
+                text+= line+"\n";
             }
         myfile.close();
 	} else text = "Err";
@@ -60,9 +75,6 @@ string Str::getCurrentPath(){
 	return path;
 }
 
-//para pegar uma linha que contenha um valor em especifico
-//Essa função funciona?
-//Está sendo usada?
 //string Str::getLine(string file) {
 //    string line;
 //    ifstream myfile(file.c_str());

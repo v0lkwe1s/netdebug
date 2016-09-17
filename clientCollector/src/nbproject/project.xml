@@ -12,6 +12,7 @@
             <sourceRootList>
                 <sourceRootElem>modules</sourceRootElem>
                 <sourceRootElem>lib</sourceRootElem>
+                <sourceRootElem>vpn</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

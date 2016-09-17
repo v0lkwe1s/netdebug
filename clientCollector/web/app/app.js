@@ -1,8 +1,13 @@
 var app = angular.module('netDebug',['ngRoute']);
-app.config(function($routeProvider, $locationProvider){
+app.config(function($routeProvider, $locationProvider, $httpProvider){
+
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
     $locationProvider.html5Mode({
         enabled: false,
         requireBase: false
+        
     });
     $routeProvider
         .when('/', {
@@ -20,13 +25,14 @@ app.controller('overviewTab', function($rootScope, $http, $scope, $location, $in
 			$http.get("json/config.json").then(function(response) {
 				$scope.hostInfo = response.data;
 			});
-			$http.get("json/disk.json").then(function(response) {
+			$http.get("http://127.0.0.1:30000/json/disk/").then(function(response) {
 				$scope.DiskInfo = response.data;
 			});
-			$http.get("json/iface.json").then(function(response) {
+
+			$http.get("http://127.0.0.1:30000/json/ifaces/").then(function(response) {
 				$scope.InetIface = response.data;
 			});
-			$http.get("json/arp.json").then(function(response) {
+            $http.get("http://127.0.0.1:30000/json/arp").then(function(response) {
 				$scope.InetArp = response.data;
 			});
     }, 3000);
