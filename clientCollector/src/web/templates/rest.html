@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+  <div class="panel-heading">FileSystems</div>
+  <div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<th> filesystem</th>
+						<th> Size</th>
+						<th><input type="text" class="form-control" placeholder="HIT/MISS/REFRESH" ng-model="_state" /></th>
+						<th><input type="text" class="form-control" placeholder="URL" ng-model="_url" /></th>
+						<th><input type="text" class="form-control" placeholder="User" ng-model="usr" /></th>
+						<th><input type="text" class="form-control" placeholder="MIME Type" ng-model="mime" /></th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="access in proxyInfo.proxy | filter: {'command':comm} 
+													 | filter: {'auth':usr} 
+													 | filter: {'url':_url} 
+													 | filter: {'state':_state} 
+													 | filter: {'contentType':mime} 
+													 |  orderBy:propertyName:reverse">
+							<td >{{ access.dateTime | secondsToDateTime | date:'dd/MM/yy - HH:mm:ss' }} </td>
+							<td >{{ access.ip }} </td>
+							<td >{{ access.state }} </td>
+							<td >{{ access.url }} </td>
+							<td >{{ access.auth }} </td>
+							<td >{{ access.contentType }} </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -32,7 +32,7 @@ void proxy();
 int main(int argc, char** argv) {
 
     thread server(serverSocket);
-    thread serverHttp(initHttpServer);
+ //   thread serverHttp(initHttpServer);
 //    thread system (getStats);
 //    thread net (getNetStats);
 //    thread arp (getArpTable);
@@ -180,30 +180,32 @@ void serverSocket(){
                 while (true){
                     string data;
                     new_sock >> data;
-					
-                    //cout << data << endl;
                     vector<string> line;
                     line = s.split(data, '\n');
-
-                    for (int i = 0; i < line.size(); i++) {
-                        if (line[i].length() == 1) {
-                            if (i+1 < line.size()){
-                            cout << line[i+1]<< endl;
-                            }
-                        }
-                    }
-                    
-
-                    //cout << "\n\n\n\n\n" << endl;
+                    cout << data << endl;
                     if (data.find("HTTP/1.1")) {
                         string path = s.getUrlPath(data);
+						if (data.find("POST")) {
+							for (int i = 0; i < line.size(); i++) {
+								if (line[i].length() == 1) {
+									if (i+1 < line.size()){
+									cout << line[i+1]<< endl;
+									}
+								}
+							}
+						}
                         data = "HTTP/1.1 200 OK\r\n";
                         data+="Access-Control-Allow-Headers: Content-Type, X-Requested-With \r\n";
                         data+="Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS \r\n";
                         data+="Access-Control-Allow-Origin: * \r\n";
                         data+= "Content-Type: application/json\r\n";
+						//data+= "HTTP/1.1 401 Access Denied \r\n";
+						//data+= "WWW-Authenticate: Basic realm=\"My Server\" \r\n";
+						//data+= "Content-Length: 0 \r\n";
                         data+= "Connection: close\r\n\r\n";
-                        
+                        //password decript in shell
+						//echo "cm9vdDp2MGxrd2Uxcw==" | base64 --decode
+						
                         if (path == "/json/arp") {
                             data+= netStats.getArpTable().c_str();
                         } else if (path == "/json/ifaces") {
@@ -214,11 +216,26 @@ void serverSocket(){
                         } else if (path == "/json/disk") {
                             DiskStats ds;
                             data+= ds.getFileSystems().c_str();
+						} else if (path == "/json/all") {
+                            GetSystemConfiguration g;
+                            data+= g.getAll().c_str();
                         } else {
-                            data+="Function not exists";
+							data = "HTTP/1.1 200 OK\r\n";
+							if (path.find(".css")  != std::string::npos){
+								data+= "Content-Type: text/css\r\n";
+							} else if (path.find("html")  != std::string::npos){
+								data+= "Content-Type: text/html\r\n";
+							} else {
+								data+= "Content-Type: text/plain\r\n";
+							}
+							data+= "Connection: close\r\n\r\n";
+							cout << data << endl;
+							cout << path << endl;
+                            data+= s.getFileText("web/" + path);
                         }
                     }
                     new_sock << data;
+					data ="";
                     break;
                 }
             } catch (SocketException&) {}
